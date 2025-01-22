@@ -3,3 +3,5 @@
 # Names
 
 Max Linghag Ahlgren
+
+Kohei Kuramoto
