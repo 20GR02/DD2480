@@ -4,3 +4,4 @@
 
 Max Linghag Ahlgren
 Simon Li
+Giacomo Ricco
