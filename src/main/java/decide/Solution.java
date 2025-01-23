@@ -1,4 +1,4 @@
-package src;
+package decide;
 
 public class Solution {
     static final double PI = Math.PI;
@@ -60,7 +60,7 @@ public class Solution {
         int length = cmv.length;
         boolean[][] pum = new boolean[length][length];
 
-        for (int i = 0; i < length; i++) {
+        /* for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
                 switch (lcm[i][j]) {
                     case ConnectorEnum.ORR:
@@ -74,7 +74,7 @@ public class Solution {
                         break;
                 }
             }
-        }
+        } */
 
         return pum;
     }

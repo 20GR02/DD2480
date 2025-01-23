@@ -1,4 +1,4 @@
-package src;
+package decide;
 
 public class LicJudge {
 
@@ -24,7 +24,7 @@ public class LicJudge {
         return lic;
     }
 
-    private boolean judgeLic0() {
+    public boolean judgeLic0() {
         // todo: implement LIC 0 judgement
         return false;
     }

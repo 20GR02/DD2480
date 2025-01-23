@@ -1,4 +1,4 @@
-package src;
+package decide;
 
 public class Coordinate {
     double x;
