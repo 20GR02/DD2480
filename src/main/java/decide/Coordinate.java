@@ -17,4 +17,20 @@ public class Coordinate {
         return distance;
 
     }
+
+    public double areaOfTriangle(Coordinate vertexB, Coordinate vertexC) {
+        double deltaY_BC = vertexB.y - vertexC.y;
+        double deltaY_CA = vertexC.y - this.y;
+        double deltaY_AB = this.y - vertexB.y;
+
+        double term1 = this.x * deltaY_BC;
+        double term2 = vertexB.x * deltaY_CA;
+        double term3 = vertexC.x * deltaY_AB;
+
+        double totalSum = term1 + term2 + term3;
+
+        double triangleArea = Math.abs(totalSum) / 2;
+        
+        return triangleArea;
+    }
 }

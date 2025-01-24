@@ -8,7 +8,7 @@ public class LicJudge {
         lic[0] = judgeLic0(coordinates, parameters.getLength1());
         lic[1] = judgeLic1();
         lic[2] = judgeLic2();
-        lic[3] = judgeLic3();
+        lic[3] = judgeLic3(coordinates, parameters.getArea1());
         lic[4] = judgeLic4();
         lic[5] = judgeLic5();
         lic[6] = judgeLic6();
@@ -62,8 +62,34 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic3() {
-        // todo: implement LIC 3 judgement
+    private boolean judgeLic3(Coordinate[] points, double thresholdArea) {
+        
+        if (points == null || points.length < 3) {
+            return false;
+        }
+
+        for (int currentIndex = 0; currentIndex < points.length -2; currentIndex++) {
+            Coordinate vertexA = points[currentIndex];
+            Coordinate vertexB = points[currentIndex + 1];
+            Coordinate vertexC = points[currentIndex + 2];
+
+            double yDiff_AB = vertexA.y - vertexB.y;
+            double yDiff_BC = vertexB.y - vertexC.y;
+            double yDiff_CA = vertexC.y - vertexA.y;
+
+            double termA = vertexA.x * yDiff_BC;
+            double termB = vertexB.x * yDiff_CA;
+            double termC = vertexC.x * yDiff_AB;
+
+            double signedArea = termA + termB + termC;
+
+            double triangleArea = Math.abs(signedArea) / 2;
+
+            if (triangleArea > thresholdArea) {
+            return true;
+            }
+        }
+
         return false;
     }
 
