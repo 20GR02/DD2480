@@ -62,31 +62,31 @@ public class LicJudge {
         return false;
     }
 
+    /**
+     * CThere exists at least one set of three consecutive data points that are the vertices of a triangle
+     * with area greater than AREA1
+     *
+     * @param points        an array representing the coordinate system, where each
+     *                      element is a pair of (x, y) coordinates
+     * @param thresholdArea the threshold area (AREA1) to compare against
+     * @return {@code true} if there exists at least one set of three consecutive
+     * points that form a triangle with an area greater than AREA1, {@code false} otherwise
+     */
     private boolean judgeLic3(Coordinate[] points, double thresholdArea) {
-        
+
         if (points == null || points.length < 3) {
             return false;
         }
 
-        for (int currentIndex = 0; currentIndex < points.length -2; currentIndex++) {
+        for (int currentIndex = 0; currentIndex < points.length - 2; currentIndex++) {
             Coordinate vertexA = points[currentIndex];
             Coordinate vertexB = points[currentIndex + 1];
             Coordinate vertexC = points[currentIndex + 2];
 
-            double yDiff_AB = vertexA.y - vertexB.y;
-            double yDiff_BC = vertexB.y - vertexC.y;
-            double yDiff_CA = vertexC.y - vertexA.y;
-
-            double termA = vertexA.x * yDiff_BC;
-            double termB = vertexB.x * yDiff_CA;
-            double termC = vertexC.x * yDiff_AB;
-
-            double signedArea = termA + termB + termC;
-
-            double triangleArea = Math.abs(signedArea) / 2;
+            double triangleArea = Coordinate.areaOfTriangle(vertexA, vertexB, vertexC);
 
             if (triangleArea > thresholdArea) {
-            return true;
+                return true;
             }
         }
 
