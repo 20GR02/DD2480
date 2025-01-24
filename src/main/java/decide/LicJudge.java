@@ -5,7 +5,7 @@ public class LicJudge {
     public boolean[] judge(Coordinate[] coordinates, Parameters parameters) {
         boolean[] lic = new boolean[15];
 
-        lic[0] = judgeLic0();
+        lic[0] = judgeLic0(coordinates, parameters.getLength1());
         lic[1] = judgeLic1();
         lic[2] = judgeLic2();
         lic[3] = judgeLic3();
@@ -24,9 +24,32 @@ public class LicJudge {
         return lic;
     }
 
-    public boolean judgeLic0() {
-        // todo: implement LIC 0 judgement
-        return false;
+
+	/**
+	* Checks if there exists at least one set of two consecutive data points
+	* in the given 2D coordinate system that are a distance greater than
+	* the specified length, LENGTH1, apart.
+	*
+	* @param coordinates a 2D matrix representing the coordinate system, where each
+	*                    element is a pair of (x, y) coordinates
+	* @param length1     the threshold distance (LENGTH1) to compare against
+	* @return {@code true} if there exists at least one pair of consecutive
+	*         points with a distance greater than LENGTH1, {@code false} otherwise
+	*/
+    public boolean judgeLic0(Coordinate[] coordinates, double length1) {
+
+        if (coordinates == null || coordinates.length < 2) {
+			return false;
+        }
+
+        for (int i = 0; i < coordinates.length - 1; i++) {
+            if (coordinates[i].distance(coordinates[i+1]) > length1) {
+                return true;
+            }
+		}
+
+
+		return false;
     }
 
     private boolean judgeLic1() {
