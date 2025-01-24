@@ -64,4 +64,47 @@ public class DecideTest {
         assertEquals(expected, actual, "Booleans should be equal.");
     }
 
+    @Test
+    public void testJudgeLic1Positive() {
+        double radius1 = 3;
+        Coordinate coordinate1 = new Coordinate(0, 0);
+		Coordinate coordinate2 = new Coordinate(5, 0);
+		Coordinate coordinate3 = new Coordinate(0, 5);
+        Coordinate[] coordinates = new Coordinate[]{coordinate1, coordinate2, coordinate3};
+
+        LicJudge LicJudge = new LicJudge();
+        Boolean expected = true;
+        Boolean actual = LicJudge.judgeLic1(coordinates, radius1);
+
+        assertEquals(expected, actual, "Booleans should be equal.");
+    }
+
+    @Test
+    public void testJudgeLic1Negative() {
+        double radius1 = 5;
+        Coordinate coordinate1 = new Coordinate(0, 0);
+		Coordinate coordinate2 = new Coordinate(3, 0);
+		Coordinate coordinate3 = new Coordinate(0, 3);
+        Coordinate[] coordinates = new Coordinate[]{coordinate1, coordinate2, coordinate3};
+
+        LicJudge LicJudge = new LicJudge();
+        Boolean expected = false;
+        Boolean actual = LicJudge.judgeLic1(coordinates, radius1);
+
+        assertEquals(expected, actual, "Booleans should be equal.");
+    }
+
+    @Test
+    public void testJudgeLic1TwoCoordinates() {
+        double radius1 = 1;
+        Coordinate coordinate1 = new Coordinate(0, 0);
+		Coordinate coordinate2 = new Coordinate(3, 0);
+        Coordinate[] coordinates = new Coordinate[]{coordinate1, coordinate2};
+
+        LicJudge LicJudge = new LicJudge();
+        Boolean expected = false;
+        Boolean actual = LicJudge.judgeLic1(coordinates, radius1);
+
+        assertEquals(expected, actual, "Booleans should be equal.");
+    }
 }
