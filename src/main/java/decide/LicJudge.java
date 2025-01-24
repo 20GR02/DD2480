@@ -87,7 +87,7 @@ public class LicJudge {
     private double circumcircleRadius(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) {
         double a = Coordinate.distance(coordinate1, coordinate2);
         double b = Coordinate.distance(coordinate2, coordinate3);
-        double c = Coordinate.distance(coordinate2, coordinate3);
+        double c = Coordinate.distance(coordinate1, coordinate3);
 
         double semiPerimeter = (a + b + c) / 2;
         double area = Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
