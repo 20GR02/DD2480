@@ -6,7 +6,7 @@ public class LicJudge {
         boolean[] lic = new boolean[15];
 
         lic[0] = judgeLic0(coordinates, parameters.getLength1());
-        lic[1] = judgeLic1();
+        lic[1] = judgeLic1(coordinates, parameters.getRadius1());
         lic[2] = judgeLic2();
         lic[3] = judgeLic3();
         lic[4] = judgeLic4();
@@ -33,8 +33,8 @@ public class LicJudge {
 	* @param coordinates a 2D matrix representing the coordinate system, where each
 	*                    element is a pair of (x, y) coordinates
 	* @param length1     the threshold distance (LENGTH1) to compare against
-	* @return {@code true} if there exists at least one pair of consecutive
-	*         points with a distance greater than LENGTH1, {@code false} otherwise
+	* @return            {@code true} if there exists at least one pair of consecutive
+	*                    points with a distance greater than LENGTH1, {@code false} otherwise
 	*/
     public boolean judgeLic0(Coordinate[] coordinates, double length1) {
 
@@ -52,8 +52,28 @@ public class LicJudge {
 		return false;
     }
 
-    private boolean judgeLic1() {
-        // todo: implement LIC 1 judgement
+    /**
+     * Checks if there exists at least one set of three consecutive data points 
+     * that cannot all be contained within or on a circle of radius RADIUS1.
+     * 
+     * @param coordinates a 2D matrix representing the coordinate system, where each
+	 *                    element is a pair of (x, y) coordinates
+     * @param radius1     the threshold radius (RADIUS1) to compare the circumradius against
+     * @return            {@code true} if there exists at least one set of consecutive
+	 *                    points with a circumradius greater than RADIUS1, {@code false} otherwise
+     */
+    public boolean judgeLic1(Coordinate[] coordinates, double radius1) {
+        
+        if (coordinates == null || coordinates.length < 3) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - 2; i++) {
+            if(circumradius(coordinates[i], coordinates[i+1], coordinates[i+2]) > radius1){
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -122,4 +142,13 @@ public class LicJudge {
         return false;
     }
 
+
+
+    private double circumradius(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) {
+        double a = coordinate1.distance(coordinate2);
+        double b = coordinate2.distance(coordinate3);
+        double c = coordinate2.distance(coordinate3);
+
+        return (a * b * c) / Math.sqrt((a + b + c) * (b + c - a) * (c + a - b) * (a + b - c));
+    }
 }
