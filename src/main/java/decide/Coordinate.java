@@ -9,10 +9,9 @@ public class Coordinate {
         this.y = y;
     }
 
-    public double distance(Coordinate coordinate) {
+    public static double distance(Coordinate coordinate1, Coordinate coordinate2) {
         double distance = Math.sqrt(
-            Math.pow(coordinate.x - this.x, 2) + Math.pow(coordinate.y - this.y, 2)
-        );
+                Math.pow(coordinate1.x - coordinate2.x, 2) + Math.pow(coordinate1.y - coordinate2.y, 2));
 
         return distance;
 
