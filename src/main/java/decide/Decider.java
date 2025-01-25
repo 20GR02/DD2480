@@ -1,6 +1,6 @@
 package decide;
 
-public class Solution {
+public class Decider {
     static final double PI = Math.PI;
     static Coordinate[] coordinates;
     static int numPoints;
@@ -16,19 +16,19 @@ public class Solution {
             , Parameters parameters
             , ConnectorEnum[][] lcm
             , boolean[] puv) {
-        Solution.coordinates = coordinates;
-        Solution.numPoints = numPoints;
-        Solution.lcm = lcm;
-        Solution.puv = puv;
+        Decider.coordinates = coordinates;
+        Decider.numPoints = numPoints;
+        Decider.lcm = lcm;
+        Decider.puv = puv;
 
         LicJudge licJudge = new LicJudge();
-        Solution.cmv = licJudge.judge(coordinates, parameters);
+        Decider.cmv = licJudge.judge(coordinates, parameters);
 
-        Solution.pum = generatePum(Solution.cmv, Solution.lcm);
+        Decider.pum = generatePum(Decider.cmv, Decider.lcm);
 
-        Solution.fuv = generateFuv(Solution.pum, Solution.puv);
+        Decider.fuv = generateFuv(Decider.pum, Decider.puv);
 
-        Solution.launch = makeLaunchDecision(Solution.fuv);
+        Decider.launch = makeLaunchDecision(Decider.fuv);
     }
 
     /**
