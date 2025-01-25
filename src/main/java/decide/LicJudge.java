@@ -27,7 +27,7 @@ public class LicJudge {
 
     /**
      * Checks if there exists at least one set of two consecutive data points
-     * in the given 2D coordinate system that are a distance greater than
+     * in the given coordinate system that are a distance greater than
      * the specified length, LENGTH1, apart.
      *
      * @param coordinates an array representing the coordinate system, where each
