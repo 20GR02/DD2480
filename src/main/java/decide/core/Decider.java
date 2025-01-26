@@ -1,4 +1,9 @@
-package decide;
+package decide.core;
+
+import decide.model.enums.CompTypeEnum;
+import decide.model.enums.ConnectorEnum;
+import decide.model.Coordinate;
+import decide.model.Parameters;
 
 public class Decider {
     static final double PI = Math.PI;

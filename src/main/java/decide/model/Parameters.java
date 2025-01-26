@@ -1,4 +1,4 @@
-package decide;
+package decide.model;
 
 public class Parameters {
     private final double length1;

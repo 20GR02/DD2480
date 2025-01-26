@@ -1,4 +1,7 @@
-package decide;
+package decide.core;
+
+import decide.model.Coordinate;
+import decide.model.Parameters;
 
 public class LicJudge {
 

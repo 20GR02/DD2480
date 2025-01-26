@@ -1,6 +1,8 @@
 package decide;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import decide.core.LicJudge;
+import decide.model.Coordinate;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

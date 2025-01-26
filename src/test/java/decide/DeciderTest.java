@@ -1,6 +1,9 @@
 package decide;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import decide.core.LicJudge;
+import decide.model.Coordinate;
 import org.junit.jupiter.api.Test;
 
 public class DeciderTest {
