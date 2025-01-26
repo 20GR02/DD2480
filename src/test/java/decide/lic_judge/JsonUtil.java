@@ -1,4 +1,4 @@
-package decide;
+package decide.lic_judge;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package decide;
+package decide.decider;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
