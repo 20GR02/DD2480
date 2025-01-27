@@ -1,0 +1,17 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 2,
+        "y": 2
+      }
+    ],
+    "length1": 1.0,
+    "expectedResult": true,
+    "errorMessage": "judgeLic0 fails positive test"
+  }
+]
