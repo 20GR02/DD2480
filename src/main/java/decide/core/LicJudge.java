@@ -1,5 +1,4 @@
 package decide.core;
-
 import decide.model.Coordinate;
 import decide.model.Parameters;
 
@@ -15,7 +14,7 @@ public class LicJudge {
         lic[4] = judgeLic4();
         lic[5] = judgeLic5();
         lic[6] = judgeLic6();
-        lic[7] = judgeLic7();
+        lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
         lic[8] = judgeLic8();
         lic[9] = judgeLic9();
         lic[10] = judgeLic10();
@@ -150,8 +149,15 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic7() {
-        // todo: implement LIC 7 judgement
+    public boolean judgeLic7(Coordinate[] coordinates, int kPoints, double length1) {
+        if (coordinates == null || coordinates.length < 3) {
+			return false;
+        }
+
+        for (int i = 0; i < coordinates.length-kPoints-1; i++){
+            if(coordinates[i].distance(coordinates[i],coordinates[i+kPoints+1])>length1)
+                return true;
+        } 
         return false;
     }
 
