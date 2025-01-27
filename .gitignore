@@ -1,3 +1,6 @@
+### Project ###
+**/src/main/resources/decide/input*.json
+
 ### Maven ###
 target/
 !.mvn/wrapper/maven-wrapper.jar

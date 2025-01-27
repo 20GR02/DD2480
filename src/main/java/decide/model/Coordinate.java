@@ -1,10 +1,18 @@
-package decide;
+package decide.model;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Coordinate {
+    @JsonProperty
     double x;
+    @JsonProperty
     double y;
 
-    public Coordinate(double x, double y) {
+    @JsonCreator
+    public Coordinate(
+            @JsonProperty("x") double x,
+            @JsonProperty("y") double y) {
         this.x = x;
         this.y = y;
     }

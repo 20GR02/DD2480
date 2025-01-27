@@ -1,0 +1,34 @@
+[
+  {
+    "coordinates": [],
+    "radius1": 0.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic0 fails validation test 0: empty coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "radius1": 0.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic0 fails validation test 1: single coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "radius1": -1.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic0 fails validation test 2: two coordinates"
+  }
+]

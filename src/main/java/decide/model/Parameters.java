@@ -1,4 +1,7 @@
-package decide;
+package decide.model;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Parameters {
     private final double length1;
@@ -21,25 +24,27 @@ public class Parameters {
     private final double radius2;
     private final double area2;
 
-    public Parameters(double length1
-            , double radius1
-            , double epsilon
-            , double area1
-            , int qPoints
-            , int quads
-            , double dist
-            , int nPoints
-            , int kPoints
-            , int aPoints
-            , int bPoints
-            , int cPoints
-            , int dPoints
-            , int ePoints
-            , int fPoints
-            , int gPoints
-            , double length2
-            , double radius2
-            , double area2) {
+    @JsonCreator
+    public Parameters(
+            @JsonProperty("length1") double length1,
+            @JsonProperty("radius1") double radius1,
+            @JsonProperty("epsilon") double epsilon,
+            @JsonProperty("area1") double area1,
+            @JsonProperty("qPoints") int qPoints,
+            @JsonProperty("quads") int quads,
+            @JsonProperty("nPoints") int nPoints,
+            @JsonProperty("dist") double dist,
+            @JsonProperty("kPoints") int kPoints,
+            @JsonProperty("aPoints") int aPoints,
+            @JsonProperty("bPoints") int bPoints,
+            @JsonProperty("cPoints") int cPoints,
+            @JsonProperty("dPoints") int dPoints,
+            @JsonProperty("ePoints") int ePoints,
+            @JsonProperty("fPoints") int fPoints,
+            @JsonProperty("gPoints") int gPoints,
+            @JsonProperty("length2") double length2,
+            @JsonProperty("radius2") double radius2,
+            @JsonProperty("area2") double area2) {
         this.length1 = length1;
         this.radius1 = radius1;
         this.epsilon = epsilon;

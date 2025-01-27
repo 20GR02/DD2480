@@ -1,0 +1,21 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 3
+      }
+    ],
+    "radius1": 5.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic1 fails negative test"
+  }
+]
