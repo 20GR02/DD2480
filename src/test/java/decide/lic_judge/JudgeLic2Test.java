@@ -21,7 +21,7 @@ public class JudgeLic2Test {
 
         LicJudge licJudge = new LicJudge();
         for (Lic2Data data : dataArray) {
-            boolean result = licJudge.judgeLic2(data.coordinates, data.radius1);
+            boolean result = licJudge.judgeLic2(data.coordinates, data.epsilon);
             assertEquals(data.expectedResult, result, data.errorMessage);
         }
     }
@@ -33,7 +33,7 @@ public class JudgeLic2Test {
 
         LicJudge licJudge = new LicJudge();
         for (Lic2Data data : dataArray) {
-            boolean result = licJudge.judgeLic2(data.coordinates, data.radius1);
+            boolean result = licJudge.judgeLic2(data.coordinates, data.epsilon);
             assertEquals(data.expectedResult, result, data.errorMessage);
         }
     }
@@ -45,7 +45,7 @@ public class JudgeLic2Test {
 
         LicJudge licJudge = new LicJudge();
         for (Lic2Data data : dataArray) {
-            boolean result = licJudge.judgeLic2(data.coordinates, data.radius1);
+            boolean result = licJudge.judgeLic2(data.coordinates, data.epsilon);
             assertEquals(data.expectedResult, result, data.errorMessage);
         }
     }
@@ -53,8 +53,7 @@ public class JudgeLic2Test {
     private final int LIC_INDEX = 2;
     private static final ObjectMapper OBJECT_MAPPER = JsonUtil.getObjectMapper();
 
-    private record Lic2Data(Coordinate[] coordinates, double radius1
-            , boolean expectedResult, String errorMessage) {
+    private record Lic2Data(Coordinate[] coordinates, double epsilon, boolean expectedResult, String errorMessage) {
     }
 
     private static Lic2Data[] getLic2Data(String path) {
