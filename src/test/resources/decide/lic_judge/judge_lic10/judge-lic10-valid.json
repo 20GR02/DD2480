@@ -1,0 +1,23 @@
+[
+  {
+    "coordinates": [],
+    "ePoints": 1,
+    "fPoints": 5,
+    "area1": 10.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic10 fails validation test 0: empty coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "ePoints": 1,
+    "fPoints": 5,
+    "area1": 10.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic10 fails validation test 1: single coordinate"
+  }
+]
