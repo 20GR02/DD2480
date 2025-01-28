@@ -82,11 +82,15 @@ jobs:
       - name: "Generate JAR Filename"
         id: jar-info
         run: |
-          ARTIFACT_ID=$(mvn help:evaluate -Dexpression=artifactId -q -DforceStdout)
-          VERSION=$(mvn help:evaluate -Dexpression=version -q -DforceStdout)
-          JAR_NAME="${ARTIFACT_ID}-${VERSION}.jar"
+          JAR_NAME=$(ls target/*.jar | grep -v "original-" | head -n 1)
           echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
+
+      - name: "Debug JAR Filename"
+        run: |
+          echo "JAR_NAME is: $JAR_NAME"
+          ls target/
 
       - name: "Run JAR"
         run: |
-          java -jar target/$JAR_NAME
+          echo "Running JAR: $JAR_NAME"
+          java -jar $JAR_NAME
