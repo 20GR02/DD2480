@@ -72,7 +72,7 @@ public class Coordinate {
 
     /**
      * Calculates the angle (in radians) formed at the vertex defined by three coordinates.
-     *
+     * <p>
      * The second coordinate is always considered the vertex of the angle. The function computes
      * the angle between the vectors formed by the first-to-second and third-to-second points using the dot product forumla.
      * If either of the vectors has zero magnitude (e.g., the first or third point coincides with the vertex),
@@ -99,6 +99,7 @@ public class Coordinate {
         }
 
         double cosTheta = dotProduct / (magnitudeV1 * magnitudeV2);
+        cosTheta = Math.min(1, Math.max(-1, cosTheta));
         double theta = Math.acos(cosTheta);
 
         return theta;
