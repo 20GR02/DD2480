@@ -1,0 +1,37 @@
+[
+  {
+    "coordinates": [],
+    "kPoints": 1,
+    "length1": 3.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic7 fails validation test 0: empty coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "kPoints": 1,
+    "length1": 3.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic7 fails validation test 1: single coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "kPoints": 1,
+    "length1": 3.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic7 fails validation test 2: two coordinates"
+  }
+]
