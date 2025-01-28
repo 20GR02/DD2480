@@ -16,7 +16,7 @@ public class LicJudge {
         lic[5] = judgeLic5();
         lic[6] = judgeLic6();
         lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
-        lic[8] = judgeLic8();
+        lic[8] = judgeLic8(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1());
         lic[9] = judgeLic9();
         lic[10] = judgeLic10();
         lic[11] = judgeLic11();
@@ -105,7 +105,7 @@ public class LicJudge {
     }
 
     /**
-     * CThere exists at least one set of three consecutive data points that are the vertices of a triangle
+     * There exists at least one set of three consecutive data points that are the vertices of a triangle
      * with area greater than AREA1
      *
      * @param points        an array representing the coordinate system, where each
@@ -176,8 +176,36 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic8() {
-        // todo: implement LIC 8 judgement
+    /**
+     * Determines whether there exists at least one set of three data points in the
+     * given array that are separated
+     * by exactly {@code aPoints} and {@code bPoints} consecutive intervening
+     * points, respectively, such that
+     * the three points cannot be contained within or on a circle of radius
+     * {@code radius1}.
+     *
+     * @param coordinates an array of {@code Coordinate} objects representing the
+     *                    data points.
+     * @param aPoints     the number of consecutive intervening points between the
+     *                    first and second data points.
+     * @param bPoints     the number of consecutive intervening points between the
+     *                    second and third data points.
+     * @param radius1     the radius of the circle.
+     * @return {@code true} if such a set of three data points exists; {@code false}
+     * otherwise.
+     */
+    public boolean judgeLic8(Coordinate[] coordinates, int aPoints, int bPoints, double radius1) {
+        if (coordinates == null || coordinates.length < 5) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - aPoints - bPoints - 2; i++) {
+            Coordinate center = Coordinate.calculateCircumcenter(coordinates[i], coordinates[i + aPoints + 1],
+                    coordinates[i + aPoints + bPoints + 2]);
+            if (center != null && Coordinate.distance(coordinates[i], center) > radius1) {
+                return true;
+            }
+        }
         return false;
     }
 
