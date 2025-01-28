@@ -6,6 +6,10 @@ on:
       - main
       - ci/45-add-ci-into-framework
 
+  pull_request:
+    branches:
+      - main
+
 jobs:
   Clean:
     name: Clean Project
