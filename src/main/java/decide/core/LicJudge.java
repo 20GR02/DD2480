@@ -1,4 +1,5 @@
 package decide.core;
+
 import decide.model.Coordinate;
 import decide.model.Parameters;
 
@@ -149,15 +150,29 @@ public class LicJudge {
         return false;
     }
 
+    /**
+     * Checks whether there exists at least one pair of data points separated by exactly
+     * {@code K_PTS} consecutive intervening points, which are a distance greater than {@code LENGTH1}.
+     * The condition is automatically not met if the number of points is less than 3.</p>
+     *
+     * @param coordinates Array of data points. If {@code null} or length is less than 3,
+     *                    returns {@code false}.
+     * @param kPoints     The number of consecutive intervening points between two data points (K_PTS).
+     *                    Must satisfy: {@code 1 ≤ K_PTS ≤ (NUMPOINTS - 2)}. Caller must ensure validity.
+     * @param length1     The threshold distance (LENGTH1). A pair of points must be separated by a
+     *                    distance greater than this value to satisfy the condition.
+     * @return {@code true} if the condition is met (at least one valid pair exists),
+     * {@code false} otherwise.
+     */
     public boolean judgeLic7(Coordinate[] coordinates, int kPoints, double length1) {
         if (coordinates == null || coordinates.length < 3) {
-			return false;
+            return false;
         }
 
-        for (int i = 0; i < coordinates.length-kPoints-1; i++){
-            if(Coordinate.distance(coordinates[i],coordinates[i+kPoints+1])>length1)
+        for (int i = 0; i < coordinates.length - kPoints - 1; i++) {
+            if (Coordinate.distance(coordinates[i], coordinates[i + kPoints + 1]) > length1)
                 return true;
-        } 
+        }
         return false;
     }
 
