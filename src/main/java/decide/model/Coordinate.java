@@ -2,12 +2,13 @@ package decide.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import decide.model.enums.CompTypeEnum;
 
 public class Coordinate {
     @JsonProperty
-    public double x;
+    double x;
     @JsonProperty
-    public double y;
+    double y;
 
     @JsonCreator
     public Coordinate(
@@ -49,12 +50,21 @@ public class Coordinate {
         return triangleArea;
     }
 
-    public static double pointToLineDistance(Coordinate p, Coordinate lineStart, Coordinate lineEnd) {
-        double numerator = Math.abs((lineEnd.y - lineStart.y) * p.x - (lineEnd.x - lineStart.x) * p.y
-                + lineEnd.x * lineStart.y - lineEnd.y * lineStart.x);
-        double denominator = Math.sqrt(Math.pow(lineEnd.y - lineStart.y, 2) +
-                Math.pow(lineEnd.x - lineStart.x, 2));
-        // avoiding division for zero
-        return numerator / (denominator + 1e-10);
+    public static Coordinate calculateCircumcenter(Coordinate p1, Coordinate p2, Coordinate p3) {
+        double D = 2 * (p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y));
+
+        if (CompTypeEnum.doubleCompare(D, 0) == CompTypeEnum.EQ) {
+            return null;
+        }
+
+        double x_c = ((p1.x * p1.x + p1.y * p1.y) * (p2.y - p3.y) +
+                      (p2.x * p2.x + p2.y * p2.y) * (p3.y - p1.y) +
+                      (p3.x * p3.x + p3.y * p3.y) * (p1.y - p2.y)) / D;
+
+        double y_c = ((p1.x * p1.x + p1.y * p1.y) * (p3.x - p2.x) +
+                      (p2.x * p2.x + p2.y * p2.y) * (p1.x - p3.x) +
+                      (p3.x * p3.x + p3.y * p3.y) * (p2.x - p1.x)) / D;
+
+        return new Coordinate(x_c, y_c);
     }
 }
