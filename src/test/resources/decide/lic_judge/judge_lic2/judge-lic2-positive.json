@@ -1,0 +1,40 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      }
+    ],
+    "epsilon": 2.35619449,
+    "expectedResult": true,
+    "errorMessage": "judgeLic2 fails positive test"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 3,
+        "y": -1
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      }
+    ],
+    "epsilon": 1.57079633,
+    "expectedResult": true,
+    "errorMessage": "judgeLic2 fails positive test"
+  }
+]
