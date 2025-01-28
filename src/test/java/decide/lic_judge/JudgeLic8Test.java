@@ -26,6 +26,30 @@ public class JudgeLic8Test {
         }
     }
 
+    @Test
+    public void testJudgeLic8Positive() {
+        String path = JsonFileReader.getJsonPositivePath(LIC_INDEX);
+        Lic8Data[] dataArray = getLic8Data(path);
+
+        LicJudge licJudge = new LicJudge();
+        for (Lic8Data data : dataArray) {
+            boolean result = licJudge.judgeLic8(data.coordinates, data.aPoints, data.bPoints, data.radius1);
+            assertEquals(data.expectedResult, result, data.errorMessage);
+        }
+    }
+
+    @Test
+    public void testJudgeLic8Valid() {
+        String path = JsonFileReader.getJsonValidPath(LIC_INDEX);
+        Lic8Data[] dataArray = getLic8Data(path);
+
+        LicJudge licJudge = new LicJudge();
+        for (Lic8Data data : dataArray) {
+            boolean result = licJudge.judgeLic8(data.coordinates, data.aPoints, data.bPoints, data.radius1);
+            assertEquals(data.expectedResult, result, data.errorMessage);
+        }
+    }
+
     private final int LIC_INDEX = 8;
     private static final ObjectMapper OBJECT_MAPPER = JsonUtil.getObjectMapper();
 
