@@ -163,27 +163,6 @@ public class LicJudge {
      * the three points cannot be contained within or on a circle of radius
      * {@code radius1}.
      *
-     * <p>
-     * <strong>Conditions:</strong>
-     * </p>
-     * <ul>
-     * <li>The method returns {@code false} if {@code coordinates} is {@code null}
-     * or its length is less than 5.</li>
-     * <li>Three data points are selected: the first point, the point separated by
-     * {@code aPoints} consecutive points,
-     * and the point separated by {@code aPoints + bPoints + 1} consecutive
-     * points.</li>
-     * <li>The condition is satisfied if the distance from any of the three points
-     * to the circumcenter of the triangle
-     * formed by these points is greater than {@code radius1}.</li>
-     * <li>The constraints are:
-     * <ul>
-     * <li>{@code 1 ≤ aPoints}, {@code 1 ≤ bPoints}</li>
-     * <li>{@code aPoints + bPoints ≤ coordinates.length - 3}</li>
-     * </ul>
-     * </li>
-     * </ul>
-     *
      * @param coordinates an array of {@code Coordinate} objects representing the
      *                    data points.
      * @param aPoints     the number of consecutive intervening points between the
@@ -192,10 +171,7 @@ public class LicJudge {
      *                    second and third data points.
      * @param radius1     the radius of the circle.
      * @return {@code true} if such a set of three data points exists; {@code false}
-     *         otherwise.
-     * @throws IllegalArgumentException if {@code aPoints < 1}, {@code bPoints < 1},
-     *                                  or if the indices calculated exceed
-     *                                  the bounds of the array.
+     * otherwise.
      */
     public boolean judgeLic8(Coordinate[] coordinates, int aPoints, int bPoints, double radius1) {
         if (coordinates == null || coordinates.length < 5) {
@@ -205,7 +181,7 @@ public class LicJudge {
         for (int i = 0; i < coordinates.length - aPoints - bPoints - 2; i++) {
             Coordinate center = Coordinate.calculateCircumcenter(coordinates[i], coordinates[i + aPoints + 1],
                     coordinates[i + aPoints + bPoints + 2]);
-            if (Coordinate.distance(coordinates[i], center) > radius1) {
+            if (center != null && Coordinate.distance(coordinates[i], center) > radius1) {
                 return true;
             }
         }
