@@ -71,6 +71,40 @@ public class Coordinate {
     }
 
     /**
+     * Calculates the angle (in radians) formed at the vertex defined by three coordinates.
+     *
+     * The second coordinate is always considered the vertex of the angle. The function computes
+     * the angle between the vectors formed by the first-to-second and third-to-second points using the dot product forumla.
+     * If either of the vectors has zero magnitude (e.g., the first or third point coincides with the vertex),
+     * the angle is undefined, and the method returns {@code Double.NaN}.
+     *
+     * @param coordinate1 The first coordinate, representing one endpoint of the angle.
+     * @param coordinate2 The vertex of the angle.
+     * @param coordinate3 The third coordinate, representing the other endpoint of the angle.
+     * @return The angle (in radians) formed at the vertex, or {@code Double.NaN} if the angle is undefined.
+     */
+    public static double angleAtVertex(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) {
+        double vector1_X = coordinate1.x - coordinate2.x;
+        double vector1_Y = coordinate1.y - coordinate2.y;
+
+        double vector2_X = coordinate3.x - coordinate2.x;
+        double vector2_Y = coordinate3.y - coordinate2.y;
+
+        double dotProduct = (vector1_X * vector2_X) + (vector1_Y * vector2_Y);
+        double magnitudeV1 = Math.sqrt(vector1_X * vector1_X + vector1_Y * vector1_Y);
+        double magnitudeV2 = Math.sqrt(vector2_X * vector2_X + vector2_Y * vector2_Y);
+
+        if (magnitudeV1 == 0 || magnitudeV2 == 0) {
+            return Double.NaN;
+        }
+
+        double cosTheta = dotProduct / (magnitudeV1 * magnitudeV2);
+        double theta = Math.acos(cosTheta);
+
+        return theta;
+    }
+
+    /**
      * Calculate the circumcenter of a triangle given three vertices
      *
      * @param p1 the first vertex of the triangle
