@@ -155,7 +155,7 @@ public class LicJudge {
         }
 
         for (int i = 0; i < coordinates.length-kPoints-1; i++){
-            if(coordinates[i].distance(coordinates[i],coordinates[i+kPoints+1])>length1)
+            if(Coordinate.distance(coordinates[i],coordinates[i+kPoints+1])>length1)
                 return true;
         } 
         return false;
