@@ -2,6 +2,7 @@ package decide.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import decide.model.enums.CompTypeEnum;
 
 public class Coordinate {
     @JsonProperty
@@ -51,6 +52,11 @@ public class Coordinate {
 
     public static Coordinate calculateCircumcenter(Coordinate p1, Coordinate p2, Coordinate p3) {
         double D = 2 * (p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y));
+
+        if (CompTypeEnum.doubleCompare(D, 0) == CompTypeEnum.EQ) {
+            return null;
+        }
+
         double x_c = ((p1.x * p1.x + p1.y * p1.y) * (p2.y - p3.y) +
                       (p2.x * p2.x + p2.y * p2.y) * (p3.y - p1.y) +
                       (p3.x * p3.x + p3.y * p3.y) * (p1.y - p2.y)) / D;
