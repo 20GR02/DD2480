@@ -15,8 +15,8 @@ public class LicJudge {
         lic[4] = judgeLic4();
         lic[5] = judgeLic5();
         lic[6] = judgeLic6();
-        lic[7] = judgeLic7();
-        lic[8] = judgeLic8();
+        lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
+        lic[8] = judgeLic8(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1());
         lic[9] = judgeLic9();
         lic[10] = judgeLic10();
         lic[11] = judgeLic11();
@@ -106,7 +106,7 @@ public class LicJudge {
     }
 
     /**
-     * CThere exists at least one set of three consecutive data points that are the vertices of a triangle
+     * There exists at least one set of three consecutive data points that are the vertices of a triangle
      * with area greater than AREA1
      *
      * @param points        an array representing the coordinate system, where each
@@ -151,13 +151,62 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic7() {
-        // todo: implement LIC 7 judgement
+    /**
+     * Checks whether there exists at least one pair of data points separated by exactly
+     * {@code K_PTS} consecutive intervening points, which are a distance greater than {@code LENGTH1}.
+     * The condition is automatically not met if the number of points is less than 3.</p>
+     *
+     * @param coordinates Array of data points. If {@code null} or length is less than 3,
+     *                    returns {@code false}.
+     * @param kPoints     The number of consecutive intervening points between two data points (K_PTS).
+     *                    Must satisfy: {@code 1 ≤ K_PTS ≤ (NUMPOINTS - 2)}. Caller must ensure validity.
+     * @param length1     The threshold distance (LENGTH1). A pair of points must be separated by a
+     *                    distance greater than this value to satisfy the condition.
+     * @return {@code true} if the condition is met (at least one valid pair exists),
+     * {@code false} otherwise.
+     */
+    public boolean judgeLic7(Coordinate[] coordinates, int kPoints, double length1) {
+        if (coordinates == null || coordinates.length < 3) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - kPoints - 1; i++) {
+            if (Coordinate.distance(coordinates[i], coordinates[i + kPoints + 1]) > length1)
+                return true;
+        }
         return false;
     }
 
-    private boolean judgeLic8() {
-        // todo: implement LIC 8 judgement
+    /**
+     * Determines whether there exists at least one set of three data points in the
+     * given array that are separated
+     * by exactly {@code aPoints} and {@code bPoints} consecutive intervening
+     * points, respectively, such that
+     * the three points cannot be contained within or on a circle of radius
+     * {@code radius1}.
+     *
+     * @param coordinates an array of {@code Coordinate} objects representing the
+     *                    data points.
+     * @param aPoints     the number of consecutive intervening points between the
+     *                    first and second data points.
+     * @param bPoints     the number of consecutive intervening points between the
+     *                    second and third data points.
+     * @param radius1     the radius of the circle.
+     * @return {@code true} if such a set of three data points exists; {@code false}
+     * otherwise.
+     */
+    public boolean judgeLic8(Coordinate[] coordinates, int aPoints, int bPoints, double radius1) {
+        if (coordinates == null || coordinates.length < 5) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - aPoints - bPoints - 2; i++) {
+            Coordinate center = Coordinate.calculateCircumcenter(coordinates[i], coordinates[i + aPoints + 1],
+                    coordinates[i + aPoints + bPoints + 2]);
+            if (center != null && Coordinate.distance(coordinates[i], center) > radius1) {
+                return true;
+            }
+        }
         return false;
     }
 

@@ -1,9 +1,10 @@
 [
   {
     "coordinates": [],
-    "radius1": 0.0,
+    "kPoints": 1,
+    "length1": 3.0,
     "expectedResult": false,
-    "errorMessage": "judgeLic1 fails validation test 0: empty coordinate"
+    "errorMessage": "judgeLic7 fails validation test 0: empty coordinate"
   },
   {
     "coordinates": [
@@ -12,9 +13,10 @@
         "y": 0
       }
     ],
-    "radius1": 0.0,
+    "kPoints": 1,
+    "length1": 3.0,
     "expectedResult": false,
-    "errorMessage": "judgeLic1 fails validation test 1: single coordinate"
+    "errorMessage": "judgeLic7 fails validation test 1: single coordinate"
   },
   {
     "coordinates": [
@@ -27,8 +29,9 @@
         "y": 1
       }
     ],
-    "radius1": -1.0,
+    "kPoints": 1,
+    "length1": 3.0,
     "expectedResult": false,
-    "errorMessage": "judgeLic1 fails validation test 2: two coordinates"
+    "errorMessage": "judgeLic7 fails validation test 2: two coordinates"
   }
 ]
