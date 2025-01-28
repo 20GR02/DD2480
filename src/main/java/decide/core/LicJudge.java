@@ -10,7 +10,7 @@ public class LicJudge {
 
         lic[0] = judgeLic0(coordinates, parameters.getLength1());
         lic[1] = judgeLic1(coordinates, parameters.getRadius1());
-        lic[2] = judgeLic2();
+        lic[2] = judgeLic2(coordinates, parameters.getEpsilon());
         lic[3] = judgeLic3(coordinates, parameters.getArea1());
         lic[4] = judgeLic4();
         lic[5] = judgeLic5();
@@ -71,7 +71,7 @@ public class LicJudge {
         }
 
         for (int i = 0; i < coordinates.length - 2; i++) {
-            if (circumcircleRadius(coordinates[i], coordinates[i + 1], coordinates[i + 2]) > radius1) {
+            if (Coordinate.circumcircleRadius(coordinates[i], coordinates[i + 1], coordinates[i + 2]) > radius1) {
                 return true;
             }
         }
@@ -80,27 +80,28 @@ public class LicJudge {
     }
 
     /**
-     * Calculates the circumcircle radius of a triangle formed by three coordinates.
-     *
-     * @param coordinate1 the first coordinate
-     * @param coordinate2 the second coordinate
-     * @param coordinate3 the third coordinate
-     * @return the circumcircle radius of the triangle formed by the three coordinates
+     * Checks if there exists at least one set of three consecutive coordinates in the given array
+     * where the angle at the vertex (the second point) does not lie within the range 
+     * {@code [π - epsilon, π + epsilon]}.
+     * 
+     * @param coordinates an array representing the coordinate system, where each
+     *                    element is a pair of (x, y) coordinates
+     * @param epsilon The allowable angular deviation in radians. Must be in the range {@code [0, Math.PI]}.
+     * @return {@code true} if at least one angle deviates beyond the range {@code [π - epsilon, π + epsilon]}, otherwise {@code false}.
      */
-    private double circumcircleRadius(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) {
-        double a = Coordinate.distance(coordinate1, coordinate2);
-        double b = Coordinate.distance(coordinate2, coordinate3);
-        double c = Coordinate.distance(coordinate1, coordinate3);
+    public boolean judgeLic2(Coordinate[] coordinates, double epsilon) {
+        
+        if (epsilon < 0 || epsilon > Math.PI || coordinates.length < 3) {
+            return false;
+        }
 
-        double semiPerimeter = (a + b + c) / 2;
-        double area = Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
-        double radius = (a * b * c) / (4 * area);
+        for (int i = 0; i < coordinates.length - 2; i++) {
+            double angle = Coordinate.angleAtVertex(coordinates[i], coordinates[i + 1], coordinates[i + 2]);
+            if(angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+                return true;
+            }
+        }
 
-        return radius;
-    }
-
-    private boolean judgeLic2() {
-        // todo: implement LIC 2 judgement
         return false;
     }
 

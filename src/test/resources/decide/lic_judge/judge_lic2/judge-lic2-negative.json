@@ -1,0 +1,59 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      }
+    ],
+    "epsilon": 2.35619449,
+    "expectedResult": false,
+    "errorMessage": "judgeLic2 fails negative test"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 3
+      }
+    ],
+    "epsilon": 0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic2 fails negative test"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "epsilon": 0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic2 fails negative test"
+  }
+]
