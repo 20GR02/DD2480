@@ -59,7 +59,7 @@ jobs:
           cache: 'maven'
 
       - name: "Execute Main Class"
-        run: mvn exec:java -Dexec.mainClass=decide.application.DeciderApplication
+        run: mvn install exec:java -Dexec.mainClass=decide.application.DeciderApplication
 
   Package:
     name: Package and run JAR
