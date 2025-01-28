@@ -13,13 +13,13 @@ public class LicJudge {
         lic[2] = judgeLic2(coordinates, parameters.getEpsilon());
         lic[3] = judgeLic3(coordinates, parameters.getArea1());
         lic[4] = judgeLic4();
-        lic[5] = judgeLic5();
+        lic[5] = judgeLic5(coordinates);
         lic[6] = judgeLic6(coordinates, parameters.getnPoints(), parameters.getDist());
         lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
         lic[8] = judgeLic8(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1());
         lic[9] = judgeLic9();
         lic[10] = judgeLic10();
-        lic[11] = judgeLic11();
+        lic[11] = judgeLic11(coordinates, parameters.getgPoints());
         lic[12] = judgeLic12(coordinates, parameters.getLength1(), parameters.getLength2(), parameters.getkPoints());
         lic[13] = judgeLic13();
         lic[14] = judgeLic14();
@@ -148,8 +148,27 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic5() {
-        // todo: implement LIC 5 judgement
+    /**
+     * Checks if there are two consecutive data points where the x-coordinate of the
+     * second point is smaller than the first.
+     *
+     * @param coordinates an array of {@link Coordinate} objects, where each element
+     *                    represents a point with x and y coordinates
+     * @return {@code true} if there exists at least one pair of consecutive points
+     *         with X[j] - X[i] < 0, {@code false} otherwise
+     */
+    public boolean judgeLic5(Coordinate[] coordinates) {
+
+        if (coordinates == null || coordinates.length < 2) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - 1; i++) {
+            if (coordinates[i + 1].getX() - coordinates[i].getX() < 0) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -287,8 +306,41 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic11() {
-        // todo: implement LIC 11 judgement
+    /**
+     * Checks if there exists at least one pair of points (X[i], Y[i]) and (X[j],
+     * Y[j]) in the given
+     * array of coordinates, separated by exactly {@code gPoints} consecutive
+     * intervening points,
+     * such that {@code X[j] - X[i] < 0} (where {@code i < j}).
+     *
+     * <p>
+     * The condition is only evaluated if the following requirements are met:
+     * <ul>
+     * <li>The number of points in the array (NUMPOINTS) is at least 3.</li>
+     * <li>{@code gPoints} is within the range
+     * {@code 1 ≤ gPoints ≤ NUMPOINTS - 2}.</li>
+     * </ul>
+     * If these requirements are not satisfied, the function returns {@code false}.
+     *
+     * @param coordinates An array of {@link Coordinate} objects representing the
+     *                    points to evaluate.
+     * @param gPoints     The gap (number of intervening points) between the two
+     *                    points being compared.
+     * @return {@code true} if there exists a pair of points that satisfy the
+     *         condition; {@code false} otherwise.
+     */
+    public boolean judgeLic11(Coordinate[] coordinates, int gPoints) {
+
+        if (coordinates == null || coordinates.length < 3 || gPoints < 1 || gPoints > coordinates.length - 2) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - gPoints - 1; i++) {
+            if (coordinates[i + gPoints + 1].getX() - coordinates[i].getX() < 0) {
+                return true;
+            }
+        }
+
         return false;
     }
 
