@@ -1,0 +1,46 @@
+[
+  {
+    "coordinates": [],
+    "epsilon": 1,
+    "expectedResult": false,
+    "errorMessage": "judgeLic2 fails validation test 0: empty coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 3,
+        "y": -1
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      }
+    ],
+    "epsilon": 4.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic2 fails validation test 1: epsilon higher than PI"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 3,
+        "y": -1
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 0
+      }
+    ],
+    "epsilon": -1.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic2 fails validation test 2: negative epsilon"
+  }
+]
