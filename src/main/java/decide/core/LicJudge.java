@@ -10,7 +10,7 @@ public class LicJudge {
 
         lic[0] = judgeLic0(coordinates, parameters.getLength1());
         lic[1] = judgeLic1(coordinates, parameters.getRadius1());
-        lic[2] = judgeLic2();
+        lic[2] = judgeLic2(coordinates, parameters.getEpsilon());
         lic[3] = judgeLic3(coordinates, parameters.getArea1());
         lic[4] = judgeLic4();
         lic[5] = judgeLic5();
@@ -79,8 +79,29 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic2() {
-        // todo: implement LIC 2 judgement
+    /**
+     * Checks if there exists at least one set of three consecutive coordinates in the given array
+     * where the angle at the vertex (the second point) does not lie within the range 
+     * {@code [π - epsilon, π + epsilon]}.
+     * 
+     * @param coordinates an array representing the coordinate system, where each
+     *                    element is a pair of (x, y) coordinates
+     * @param epsilon The allowable angular deviation in radians. Must be in the range {@code [0, Math.PI]}.
+     * @return {@code true} if at least one angle deviates beyond the range {@code [π - epsilon, π + epsilon]}, otherwise {@code false}.
+     */
+    public boolean judgeLic2(Coordinate[] coordinates, double epsilon) {
+        
+        if (epsilon < 0 || epsilon > Math.PI || coordinates.length < 3) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - 2; i++) {
+            double angle = Coordinate.angleAtVertex(coordinates[i], coordinates[i + 1], coordinates[i + 2]);
+            if(angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+                return true;
+            }
+        }
+
         return false;
     }
 
