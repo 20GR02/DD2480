@@ -1,0 +1,9 @@
+[
+  {
+    "coordinates": [],
+    "kPoints": 3,
+    "quads": 2,
+    "expectedResult": false,
+    "errorMessage": "judgeLic4 fails validation test 0: empty coordinate"
+  }
+]

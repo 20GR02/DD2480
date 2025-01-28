@@ -1,0 +1,22 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": -1,
+        "y": -1
+      },
+      {
+        "x": -3,
+        "y": 0
+      }
+    ],
+    "kPoints": 3,
+    "quads": 2,
+    "expectedResult": true,
+    "errorMessage": "judgeLic4 fails positive test"
+  }
+]

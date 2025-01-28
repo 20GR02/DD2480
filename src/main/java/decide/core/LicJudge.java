@@ -12,7 +12,7 @@ public class LicJudge {
         lic[1] = judgeLic1(coordinates, parameters.getRadius1());
         lic[2] = judgeLic2(coordinates, parameters.getEpsilon());
         lic[3] = judgeLic3(coordinates, parameters.getArea1());
-        lic[4] = judgeLic4();
+        lic[4] = judgeLic4(coordinates, parameters.getkPoints(), parameters.getQuads());
         lic[5] = judgeLic5(coordinates);
         lic[6] = judgeLic6(coordinates, parameters.getnPoints(), parameters.getDist());
         lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
@@ -143,8 +143,72 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic4() {
-        // todo: implement LIC 4 judgement
+    /**
+     * Checks if there exists at least one set of Q_PTS consecutive data points that
+     * lie in more than QUADS distinct quadrants.
+     *
+     * @param points            an array representing the coordinate system, where
+     *                          each
+     *                          element is a pair of (x, y) coordinates
+     * @param numberOfPoints    the number of consecutive points to evaluate (Q_PTS)
+     * @param requiredQuadrants the minimum number of distinct quadrants the points
+     *                          must span (QUADS)
+     * @return {@code true} if there exists at least one set of Q_PTS consecutive
+     *         points
+     *         that span more than QUADS distinct quadrants, {@code false} otherwise
+     */
+    public boolean judgeLic4(Coordinate[] points, int numberOfPoints, int requiredQuadrants) {
+
+        if (points == null) {
+            return false;
+        }
+
+        if (points.length < numberOfPoints) {
+            return false;
+        }
+
+        if (requiredQuadrants < 1 || requiredQuadrants > 4) {
+            return false;
+        }
+
+        for (int startIndex = 0; startIndex <= points.length - numberOfPoints; startIndex++) {
+
+            boolean hasQuadrant1 = false;
+            boolean hasQuadrant2 = false;
+            boolean hasQuadrant3 = false;
+            boolean hasQuadrant4 = false;
+
+            for (int offset = 0; offset < numberOfPoints; offset++) {
+                Coordinate currentPoint = points[startIndex + offset];
+
+                int quadrant = Coordinate.findQuadrant(currentPoint);
+
+                if (quadrant == 1) {
+                    hasQuadrant1 = true;
+                } else if (quadrant == 2) {
+                    hasQuadrant2 = true;
+                } else if (quadrant == 3) {
+                    hasQuadrant3 = true;
+                } else if (quadrant == 4) {
+                    hasQuadrant4 = true;
+                }
+            }
+
+            int distinctQuadrants = 0;
+            if (hasQuadrant1)
+                distinctQuadrants++;
+            if (hasQuadrant2)
+                distinctQuadrants++;
+            if (hasQuadrant3)
+                distinctQuadrants++;
+            if (hasQuadrant4)
+                distinctQuadrants++;
+
+            if (distinctQuadrants > requiredQuadrants) {
+                return true;
+            }
+        }
+
         return false;
     }
 

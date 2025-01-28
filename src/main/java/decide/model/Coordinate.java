@@ -56,7 +56,8 @@ public class Coordinate {
      * @param coordinate1 the first coordinate
      * @param coordinate2 the second coordinate
      * @param coordinate3 the third coordinate
-     * @return the circumcircle radius of the triangle formed by the three coordinates
+     * @return the circumcircle radius of the triangle formed by the three
+     *         coordinates
      */
     public static double circumcircleRadius(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) {
         double a = Coordinate.distance(coordinate1, coordinate2);
@@ -71,17 +72,24 @@ public class Coordinate {
     }
 
     /**
-     * Calculates the angle (in radians) formed at the vertex defined by three coordinates.
+     * Calculates the angle (in radians) formed at the vertex defined by three
+     * coordinates.
      * <p>
-     * The second coordinate is always considered the vertex of the angle. The function computes
-     * the angle between the vectors formed by the first-to-second and third-to-second points using the dot product forumla.
-     * If either of the vectors has zero magnitude (e.g., the first or third point coincides with the vertex),
+     * The second coordinate is always considered the vertex of the angle. The
+     * function computes
+     * the angle between the vectors formed by the first-to-second and
+     * third-to-second points using the dot product forumla.
+     * If either of the vectors has zero magnitude (e.g., the first or third point
+     * coincides with the vertex),
      * the angle is undefined, and the method returns {@code Double.NaN}.
      *
-     * @param coordinate1 The first coordinate, representing one endpoint of the angle.
+     * @param coordinate1 The first coordinate, representing one endpoint of the
+     *                    angle.
      * @param coordinate2 The vertex of the angle.
-     * @param coordinate3 The third coordinate, representing the other endpoint of the angle.
-     * @return The angle (in radians) formed at the vertex, or {@code Double.NaN} if the angle is undefined.
+     * @param coordinate3 The third coordinate, representing the other endpoint of
+     *                    the angle.
+     * @return The angle (in radians) formed at the vertex, or {@code Double.NaN} if
+     *         the angle is undefined.
      */
     public static double angleAtVertex(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) {
         double vector1_X = coordinate1.x - coordinate2.x;
@@ -150,8 +158,7 @@ public class Coordinate {
 
         double numerator = Math.abs(
                 dy * p.x - dx * p.y +
-                        lineEnd.x * lineStart.y - lineEnd.y * lineStart.x
-        );
+                        lineEnd.x * lineStart.y - lineEnd.y * lineStart.x);
         return numerator / denominator;
     }
 
@@ -161,5 +168,16 @@ public class Coordinate {
 
     public double getY() {
         return y;
+    }
+
+    public static int findQuadrant(Coordinate point) {
+        if (point.x >= 0 && point.y >= 0) {
+            return 1;
+        } else if (point.x < 0 && point.y >= 0) {
+            return 2;
+        } else if (point.x <= 0 && point.y < 0) {
+            return 3;
+        } else
+            return 4;
     }
 }
