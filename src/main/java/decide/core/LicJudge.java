@@ -19,7 +19,7 @@ public class LicJudge {
         lic[8] = judgeLic8(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1());
         lic[9] = judgeLic9();
         lic[10] = judgeLic10();
-        lic[11] = judgeLic11();
+        lic[11] = judgeLic11(coordinates, parameters.getgPoints());
         lic[12] = judgeLic12();
         lic[13] = judgeLic13();
         lic[14] = judgeLic14();
@@ -81,24 +81,28 @@ public class LicJudge {
     }
 
     /**
-     * Checks if there exists at least one set of three consecutive coordinates in the given array
-     * where the angle at the vertex (the second point) does not lie within the range 
+     * Checks if there exists at least one set of three consecutive coordinates in
+     * the given array
+     * where the angle at the vertex (the second point) does not lie within the
+     * range
      * {@code [π - epsilon, π + epsilon]}.
      * 
      * @param coordinates an array representing the coordinate system, where each
      *                    element is a pair of (x, y) coordinates
-     * @param epsilon The allowable angular deviation in radians. Must be in the range {@code [0, Math.PI]}.
-     * @return {@code true} if at least one angle deviates beyond the range {@code [π - epsilon, π + epsilon]}, otherwise {@code false}.
+     * @param epsilon     The allowable angular deviation in radians. Must be in the
+     *                    range {@code [0, Math.PI]}.
+     * @return {@code true} if at least one angle deviates beyond the range
+     *         {@code [π - epsilon, π + epsilon]}, otherwise {@code false}.
      */
     public boolean judgeLic2(Coordinate[] coordinates, double epsilon) {
-        
+
         if (epsilon < 0 || epsilon > Math.PI || coordinates.length < 3) {
             return false;
         }
 
         for (int i = 0; i < coordinates.length - 2; i++) {
             double angle = Coordinate.angleAtVertex(coordinates[i], coordinates[i + 1], coordinates[i + 2]);
-            if(angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+            if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
                 return true;
             }
         }
@@ -302,8 +306,41 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic11() {
-        // todo: implement LIC 11 judgement
+    /**
+     * Checks if there exists at least one pair of points (X[i], Y[i]) and (X[j],
+     * Y[j]) in the given
+     * array of coordinates, separated by exactly {@code gPoints} consecutive
+     * intervening points,
+     * such that {@code X[j] - X[i] < 0} (where {@code i < j}).
+     *
+     * <p>
+     * The condition is only evaluated if the following requirements are met:
+     * <ul>
+     * <li>The number of points in the array (NUMPOINTS) is at least 3.</li>
+     * <li>{@code gPoints} is within the range
+     * {@code 1 ≤ gPoints ≤ NUMPOINTS - 2}.</li>
+     * </ul>
+     * If these requirements are not satisfied, the function returns {@code false}.
+     *
+     * @param coordinates An array of {@link Coordinate} objects representing the
+     *                    points to evaluate.
+     * @param gPoints     The gap (number of intervening points) between the two
+     *                    points being compared.
+     * @return {@code true} if there exists a pair of points that satisfy the
+     *         condition; {@code false} otherwise.
+     */
+    public boolean judgeLic11(Coordinate[] coordinates, int gPoints) {
+
+        if (coordinates == null || coordinates.length < 3 || gPoints < 1 || gPoints > coordinates.length - 2) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - gPoints - 1; i++) {
+            if (coordinates[i + gPoints + 1].getX() - coordinates[i].getX() < 0) {
+                return true;
+            }
+        }
+
         return false;
     }
 

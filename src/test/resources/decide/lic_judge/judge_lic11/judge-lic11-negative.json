@@ -1,0 +1,25 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 2,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 0
+      }
+    ],
+    "gPoints": 2,
+    "expectedResult": false,
+    "errorMessage": "judgeLic11 fails negative test"
+  }
+]
