@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Coordinate {
     @JsonProperty
-    double x;
+    public double x;
     @JsonProperty
-    double y;
+    public double y;
 
     @JsonCreator
     public Coordinate(
@@ -47,5 +47,14 @@ public class Coordinate {
         double triangleArea = Math.abs(totalSum) / 2;
 
         return triangleArea;
+    }
+
+    public static double pointToLineDistance(Coordinate p, Coordinate lineStart, Coordinate lineEnd) {
+        double numerator = Math.abs((lineEnd.y - lineStart.y) * p.x - (lineEnd.x - lineStart.x) * p.y
+                + lineEnd.x * lineStart.y - lineEnd.y * lineStart.x);
+        double denominator = Math.sqrt(Math.pow(lineEnd.y - lineStart.y, 2) +
+                Math.pow(lineEnd.x - lineStart.x, 2));
+        // avoiding division for zero
+        return numerator / (denominator + 1e-10);
     }
 }
