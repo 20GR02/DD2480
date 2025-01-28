@@ -51,6 +51,26 @@ public class Coordinate {
     }
 
     /**
+     * Calculates the circumcircle radius of a triangle formed by three coordinates.
+     *
+     * @param coordinate1 the first coordinate
+     * @param coordinate2 the second coordinate
+     * @param coordinate3 the third coordinate
+     * @return the circumcircle radius of the triangle formed by the three coordinates
+     */
+    public static double circumcircleRadius(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) {
+        double a = Coordinate.distance(coordinate1, coordinate2);
+        double b = Coordinate.distance(coordinate2, coordinate3);
+        double c = Coordinate.distance(coordinate1, coordinate3);
+
+        double semiPerimeter = (a + b + c) / 2;
+        double area = Math.sqrt(semiPerimeter * (semiPerimeter - a) * (semiPerimeter - b) * (semiPerimeter - c));
+        double radius = (a * b * c) / (4 * area);
+
+        return radius;
+    }
+
+    /**
      * Calculate the circumcenter of a triangle given three vertices
      *
      * @param p1 the first vertex of the triangle
