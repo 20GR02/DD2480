@@ -1,0 +1,17 @@
+[
+  {
+    "coordinates": [],
+    "expectedResult": false,
+    "errorMessage": "judgeLic5 fails validation test 0: empty coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "expectedResult": false,
+    "errorMessage": "judgeLic5 fails validation test 1: single coordinate"
+  }
+]

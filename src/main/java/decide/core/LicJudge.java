@@ -13,7 +13,7 @@ public class LicJudge {
         lic[2] = judgeLic2(coordinates, parameters.getEpsilon());
         lic[3] = judgeLic3(coordinates, parameters.getArea1());
         lic[4] = judgeLic4();
-        lic[5] = judgeLic5();
+        lic[5] = judgeLic5(coordinates);
         lic[6] = judgeLic6(coordinates, parameters.getnPoints(), parameters.getDist());
         lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
         lic[8] = judgeLic8(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1());
@@ -27,7 +27,6 @@ public class LicJudge {
         return lic;
     }
 
-
     /**
      * Checks if there exists at least one set of two consecutive data points
      * in the given coordinate system that are a distance greater than
@@ -37,7 +36,7 @@ public class LicJudge {
      *                    element is a pair of (x, y) coordinates
      * @param length1     the threshold distance (LENGTH1) to compare against
      * @return {@code true} if there exists at least one pair of consecutive
-     * points with a distance greater than LENGTH1, {@code false} otherwise
+     *         points with a distance greater than LENGTH1, {@code false} otherwise
      */
     public boolean judgeLic0(Coordinate[] coordinates, double length1) {
 
@@ -60,9 +59,11 @@ public class LicJudge {
      *
      * @param coordinates an array representing the coordinate system, where each
      *                    element is a pair of (x, y) coordinates
-     * @param radius1     the threshold radius (RADIUS1) to compare the circumradius against
+     * @param radius1     the threshold radius (RADIUS1) to compare the circumradius
+     *                    against
      * @return {@code true} if there exists at least one set of consecutive
-     * points with a circumradius greater than RADIUS1, {@code false} otherwise
+     *         points with a circumradius greater than RADIUS1, {@code false}
+     *         otherwise
      */
     public boolean judgeLic1(Coordinate[] coordinates, double radius1) {
 
@@ -106,14 +107,16 @@ public class LicJudge {
     }
 
     /**
-     * There exists at least one set of three consecutive data points that are the vertices of a triangle
+     * There exists at least one set of three consecutive data points that are the
+     * vertices of a triangle
      * with area greater than AREA1
      *
      * @param points        an array representing the coordinate system, where each
      *                      element is a pair of (x, y) coordinates
      * @param thresholdArea the threshold area (AREA1) to compare against
      * @return {@code true} if there exists at least one set of three consecutive
-     * points that form a triangle with an area greater than AREA1, {@code false} otherwise
+     *         points that form a triangle with an area greater than AREA1,
+     *         {@code false} otherwise
      */
     private boolean judgeLic3(Coordinate[] points, double thresholdArea) {
 
@@ -141,8 +144,27 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic5() {
-        // todo: implement LIC 5 judgement
+    /**
+     * Checks if there are two consecutive data points where the x-coordinate of the
+     * second point is smaller than the first.
+     *
+     * @param coordinates an array of {@link Coordinate} objects, where each element
+     *                    represents a point with x and y coordinates
+     * @return {@code true} if there exists at least one pair of consecutive points
+     *         with X[j] - X[i] < 0, {@code false} otherwise
+     */
+    public boolean judgeLic5(Coordinate[] coordinates) {
+
+        if (coordinates == null || coordinates.length < 2) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - 1; i++) {
+            if (coordinates[i + 1].getX() - coordinates[i].getX() < 0) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -167,8 +189,8 @@ public class LicJudge {
      * <p>
      * Constraints:
      * <ul>
-     *     <li>3 <= {@code nPoints} <= `coordinates.length`</li>
-     *     <li>0 <= {@code dist} </li>
+     * <li>3 <= {@code nPoints} <= `coordinates.length`</li>
+     * <li>0 <= {@code dist}</li>
      * </ul>
      *
      * @param coordinates An array of {@link Coordinate} objects representing the
@@ -203,18 +225,27 @@ public class LicJudge {
     }
 
     /**
-     * Checks whether there exists at least one pair of data points separated by exactly
-     * {@code K_PTS} consecutive intervening points, which are a distance greater than {@code LENGTH1}.
-     * The condition is automatically not met if the number of points is less than 3.</p>
+     * Checks whether there exists at least one pair of data points separated by
+     * exactly
+     * {@code K_PTS} consecutive intervening points, which are a distance greater
+     * than {@code LENGTH1}.
+     * The condition is automatically not met if the number of points is less than
+     * 3.
+     * </p>
      *
-     * @param coordinates Array of data points. If {@code null} or length is less than 3,
+     * @param coordinates Array of data points. If {@code null} or length is less
+     *                    than 3,
      *                    returns {@code false}.
-     * @param kPoints     The number of consecutive intervening points between two data points (K_PTS).
-     *                    Must satisfy: {@code 1 ≤ K_PTS ≤ (NUMPOINTS - 2)}. Caller must ensure validity.
-     * @param length1     The threshold distance (LENGTH1). A pair of points must be separated by a
+     * @param kPoints     The number of consecutive intervening points between two
+     *                    data points (K_PTS).
+     *                    Must satisfy: {@code 1 ≤ K_PTS ≤ (NUMPOINTS - 2)}. Caller
+     *                    must ensure validity.
+     * @param length1     The threshold distance (LENGTH1). A pair of points must be
+     *                    separated by a
      *                    distance greater than this value to satisfy the condition.
-     * @return {@code true} if the condition is met (at least one valid pair exists),
-     * {@code false} otherwise.
+     * @return {@code true} if the condition is met (at least one valid pair
+     *         exists),
+     *         {@code false} otherwise.
      */
     public boolean judgeLic7(Coordinate[] coordinates, int kPoints, double length1) {
         if (coordinates == null || coordinates.length < 3) {
@@ -244,7 +275,7 @@ public class LicJudge {
      *                    second and third data points.
      * @param radius1     the radius of the circle.
      * @return {@code true} if such a set of three data points exists; {@code false}
-     * otherwise.
+     *         otherwise.
      */
     public boolean judgeLic8(Coordinate[] coordinates, int aPoints, int bPoints, double radius1) {
         if (coordinates == null || coordinates.length < 5) {
