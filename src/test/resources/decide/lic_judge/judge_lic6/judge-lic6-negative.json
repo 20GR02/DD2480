@@ -1,0 +1,26 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 2,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 8,
+        "y": 8
+      }
+    ],
+    "nPoints": 3,
+    "dist": 2.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic6 fails negative test"
+  }
+]

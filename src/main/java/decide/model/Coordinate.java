@@ -6,9 +6,9 @@ import decide.model.enums.CompTypeEnum;
 
 public class Coordinate {
     @JsonProperty
-    double x;
+    private double x;
     @JsonProperty
-    double y;
+    private double y;
 
     @JsonCreator
     public Coordinate(
@@ -50,6 +50,14 @@ public class Coordinate {
         return triangleArea;
     }
 
+    /**
+     * Calculate the circumcenter of a triangle given three vertices
+     *
+     * @param p1 the first vertex of the triangle
+     * @param p2 the second vertex of the triangle
+     * @param p3 the third vertex of the triangle
+     * @return the circumcenter of the triangle
+     */
     public static Coordinate calculateCircumcenter(Coordinate p1, Coordinate p2, Coordinate p3) {
         double D = 2 * (p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y));
 
@@ -58,13 +66,45 @@ public class Coordinate {
         }
 
         double x_c = ((p1.x * p1.x + p1.y * p1.y) * (p2.y - p3.y) +
-                      (p2.x * p2.x + p2.y * p2.y) * (p3.y - p1.y) +
-                      (p3.x * p3.x + p3.y * p3.y) * (p1.y - p2.y)) / D;
-        
+                (p2.x * p2.x + p2.y * p2.y) * (p3.y - p1.y) +
+                (p3.x * p3.x + p3.y * p3.y) * (p1.y - p2.y)) / D;
+
         double y_c = ((p1.x * p1.x + p1.y * p1.y) * (p3.x - p2.x) +
-                      (p2.x * p2.x + p2.y * p2.y) * (p1.x - p3.x) +
-                      (p3.x * p3.x + p3.y * p3.y) * (p2.x - p1.x)) / D;
-        
+                (p2.x * p2.x + p2.y * p2.y) * (p1.x - p3.x) +
+                (p3.x * p3.x + p3.y * p3.y) * (p2.x - p1.x)) / D;
+
         return new Coordinate(x_c, y_c);
+    }
+
+    /**
+     * Calculate the distance between a point and a line
+     *
+     * @param p         the point
+     * @param lineStart the start point of the line
+     * @param lineEnd   the end point of the line
+     * @return the distance between the point and the line
+     */
+    public static double pointToLineDistance(Coordinate p, Coordinate lineStart, Coordinate lineEnd) {
+        double dx = lineEnd.x - lineStart.x;
+        double dy = lineEnd.y - lineStart.y;
+
+        double denominator = Math.sqrt(dx * dx + dy * dy);
+        if (CompTypeEnum.doubleCompare(denominator, 0) == CompTypeEnum.EQ) {
+            return Coordinate.distance(p, lineStart);
+        }
+
+        double numerator = Math.abs(
+                dy * p.x - dx * p.y +
+                        lineEnd.x * lineStart.y - lineEnd.y * lineStart.x
+        );
+        return numerator / denominator;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
     }
 }

@@ -14,7 +14,7 @@ public class LicJudge {
         lic[3] = judgeLic3(coordinates, parameters.getArea1());
         lic[4] = judgeLic4();
         lic[5] = judgeLic5();
-        lic[6] = judgeLic6();
+        lic[6] = judgeLic6(coordinates, parameters.getnPoints(), parameters.getDist());
         lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
         lic[8] = judgeLic8(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1());
         lic[9] = judgeLic9();
@@ -145,8 +145,59 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic6() {
-        // todo: implement LIC 6 judgement
+    /**
+     * Evaluates whether there exists at least one set of `nPoints` consecutive data
+     * points
+     * such that at least one of the points lies at a distance greater than `dist`
+     * from the
+     * line connecting the first and last points of the set.
+     * <p>
+     * Special cases:
+     * <ul>
+     * <li>
+     * If the first and last points of the set are identical, the distance is
+     * calculated from the coincident point to all other points in the set.
+     * </li>
+     * <li>
+     * The condition is not evaluated if `coordinates` is null or if the total
+     * number of points is less than 3.
+     * </li>
+     * </ul>
+     * <p>
+     * Constraints:
+     * <ul>
+     *     <li>3 <= {@code nPoints} <= `coordinates.length`</li>
+     *     <li>0 <= {@code dist} </li>
+     * </ul>
+     *
+     * @param coordinates An array of {@link Coordinate} objects representing the
+     *                    data points.
+     * @param nPoints     The number of consecutive points to evaluate (minimum 3).
+     * @param dist        The threshold distance to compare against.
+     * @return {@code true} if the condition is met, {@code false} otherwise.
+     */
+    public boolean judgeLic6(Coordinate[] coordinates, int nPoints, double dist) {
+
+        if (coordinates == null || coordinates.length < 3) {
+            return false;
+        }
+
+        for (int i = 0; i <= coordinates.length - nPoints; i++) {
+            Coordinate first = coordinates[i];
+            Coordinate last = coordinates[i + nPoints - 1];
+            double distance;
+            for (int j = i + 1; j < i + nPoints - 1; j++) {
+                Coordinate current = coordinates[j];
+                if (first.getX() == last.getX() && first.getY() == last.getY()) {
+                    distance = Coordinate.distance(current, first);
+                } else {
+                    distance = Coordinate.pointToLineDistance(current, first, last);
+                }
+                if (distance > dist) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
