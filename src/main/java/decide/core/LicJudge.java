@@ -145,14 +145,13 @@ public class LicJudge {
     }
 
     /**
-     * Checks if there exists at least one set of two consecutive data points
-     * There exists at least one set of two consecutive data points,
-     * (X[i],Y[i]) and (X[j],Y[j]), such that X[j] - X[i] < 0
+     * Checks if there are two consecutive data points where the x-coordinate of the
+     * second point is smaller than the first.
      *
-     * @param coordinates an array representing the coordinate system, where each
-     *                    element is a pair of (x, y) coordinates
-     * @return {@code true} if there exists at least one pair of consecutive
-     *         such that X[j] - X[i] < 0, {@code false} otherwise
+     * @param coordinates an array of {@link Coordinate} objects, where each element
+     *                    represents a point with x and y coordinates
+     * @return {@code true} if there exists at least one pair of consecutive points
+     *         with X[j] - X[i] < 0, {@code false} otherwise
      */
     public boolean judgeLic5(Coordinate[] coordinates) {
 
