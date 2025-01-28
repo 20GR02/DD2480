@@ -21,6 +21,6 @@
     "kPoints": 1,
     "length1": 3.0,
     "expectedResult": true,
-    "errorMessage": "judgeLic1 fails negative test"
+    "errorMessage": "judgeLic7 fails negative test"
   }
 ]
