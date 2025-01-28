@@ -20,7 +20,7 @@ public class LicJudge {
         lic[9] = judgeLic9();
         lic[10] = judgeLic10();
         lic[11] = judgeLic11(coordinates, parameters.getgPoints());
-        lic[12] = judgeLic12();
+        lic[12] = judgeLic12(coordinates, parameters.getLength1(), parameters.getLength2(), parameters.getkPoints());
         lic[13] = judgeLic13();
         lic[14] = judgeLic14();
 
@@ -344,8 +344,49 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic12() {
-        // todo: implement LIC 12 judgement
+    /**
+     * Checks whether there exist two data points in the given array, separated by
+     * exactly {@code kPoints} consecutive intervening points, such that one pair's
+     * distance is
+     * greater
+     * than {@code length1} and another pair's distance is less than
+     * {@code length2}. Both
+     * conditions must be
+     * satisfied for the function to return {@code true}.
+     *
+     * @param coordinates an array of {@code Coordinate} objects representing the
+     *                    data points.
+     * @param length1     The distance threshold for the greater distance condition.
+     * @param length2     The distance threshold for the smaller distance condition
+     *                    (must be >= 0).
+     * @param kPoints     The number of consecutive intervening points between the
+     *                    two points being checked.
+     * @return {@code true} if both conditions are satisfied, {@code false}
+     *         otherwise.
+     */
+    public boolean judgeLic12(Coordinate[] coordinates, double length1, double length2, int kPoints) {
+
+        if (coordinates == null || coordinates.length < 3 || length2 < 0) {
+            return false;
+        }
+
+        boolean cond1 = false;
+        boolean cond2 = false;
+
+        for (int i = 0; i < coordinates.length - kPoints - 1; i++) {
+            double dist = Coordinate.distance(coordinates[i], coordinates[i + kPoints + 1]);
+            if (dist > length1) {
+                cond1 = true;
+            }
+            if (dist < length2) {
+                cond2 = true;
+            }
+
+            if (cond1 && cond2) {
+                return true;
+            }
+        }
+
         return false;
     }
 

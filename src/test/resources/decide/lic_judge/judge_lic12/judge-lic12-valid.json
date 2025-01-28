@@ -1,0 +1,56 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 1
+      }
+    ],
+    "length1": 5,
+    "length2": 1,
+    "kPoints": 2,
+    "expectedResult": false,
+    "errorMessage": "judgeLic12 fails valid test: less than 4 NUMPOINTS"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 2
+      },
+      {
+        "x": 0,
+        "y": 7
+      },
+      {
+        "x": 4,
+        "y": 5
+      }
+    ],
+    "length1": 5,
+    "length2": -0.1,
+    "kPoints": 2,
+    "expectedResult": false,
+    "errorMessage": "judgeLic12 fails valid test: negative length2"
+  }
+]
