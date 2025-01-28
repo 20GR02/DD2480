@@ -17,7 +17,7 @@ public class LicJudge {
         lic[6] = judgeLic6(coordinates, parameters.getnPoints(), parameters.getDist());
         lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
         lic[8] = judgeLic8(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1());
-        lic[9] = judgeLic9();
+        lic[9] = judgeLic9(coordinates, parameters.getcPoints(), parameters.getdPoints(), parameters.getEpsilon());
         lic[10] = judgeLic10();
         lic[11] = judgeLic11(coordinates, parameters.getgPoints());
         lic[12] = judgeLic12(coordinates, parameters.getLength1(), parameters.getLength2(), parameters.getkPoints());
@@ -296,8 +296,50 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic9() {
-        // todo: implement LIC 9 judgement
+    /**
+     * Determines whether there exists at least one set of three data points in the
+     * given
+     * array of coordinates, separated by exactly {@code cPoints} and
+     * {@code dPoints}
+     * consecutive intervening points, respectively, such that the angle formed at
+     * the vertex
+     * satisfies one of the following conditions:
+     * <ul>
+     * <li>{@code angle < (PI - epsilon)}</li>
+     * <li>{@code angle > (PI + epsilon)}</li>
+     * </ul>
+     * The vertex is always the second point of the set.
+     *
+     * @param coordinates An array of {@link Coordinate} objects representing the
+     *                    data points.
+     * @param cPoints     The number of consecutive intervening points between the
+     *                    first
+     *                    point and the vertex of the angle. Must be at least 1.
+     * @param dPoints     The number of consecutive intervening points between the
+     *                    vertex
+     *                    of the angle and the third point. Must be at least 1.
+     * @param epsilon     A small positive value used to define the angular
+     *                    deviation
+     *                    from {@code PI} (straight angle).
+     * @return {@code true} if such a set of points exists that satisfies the
+     *         conditions;
+     *         {@code false} otherwise.
+     */
+    public boolean judgeLic9(Coordinate[] coordinates, int cPoints, int dPoints, double epsilon) {
+
+        if (coordinates == null || coordinates.length < 5 || cPoints < 1 || dPoints < 1
+                || cPoints + dPoints > coordinates.length - 3) {
+            return false;
+        }
+
+        for (int i = 0; i < coordinates.length - cPoints - dPoints - 2; i++) {
+            double angle = Coordinate.angleAtVertex(coordinates[i], coordinates[i + cPoints + 1],
+                    coordinates[i + cPoints + 1 + dPoints + 1]);
+            if (angle < Math.PI - epsilon || angle > Math.PI + epsilon) {
+                return true;
+            }
+        }
+
         return false;
     }
 
