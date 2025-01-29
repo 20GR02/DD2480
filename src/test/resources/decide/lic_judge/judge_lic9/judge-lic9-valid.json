@@ -5,7 +5,7 @@
     "dPoints": 2,
     "epsilon": 2.35619449,
     "expectedResult": false,
-    "errorMessage": "judgeLic9 fails validvalidation test: empty coordinate"
+    "errorMessage": "judgeLic9 fails validation test: empty coordinate"
   },
   {
     "coordinates": [
@@ -18,7 +18,7 @@
     "dPoints": 1,
     "epsilon": 2.35619449,
     "expectedResult": false,
-    "errorMessage": "judgeLic9 fails validvalidation test: single coordinate"
+    "errorMessage": "judgeLic9 fails validation test: single coordinate"
   },
   {
     "coordinates": [
@@ -43,6 +43,6 @@
     "dPoints": 2,
     "epsilon": 2.35619449,
     "expectedResult": false,
-    "errorMessage": "judgeLic9 fails validvalidation test: less than 5 coordinates"
+    "errorMessage": "judgeLic9 fails validation test: less than 5 coordinates"
   }
 ]
