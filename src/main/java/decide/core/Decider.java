@@ -184,7 +184,7 @@ public class Decider {
      * @param fuv Final Unlocking Vector
      * @return final launch / no launch decision
      */
-    private static boolean makeLaunchDecision(boolean[] fuv) {
+    public static boolean makeLaunchDecision(boolean[] fuv) {
         boolean launchDecision = true;
 
         for (int i = 0; i < fuv.length; i++) {

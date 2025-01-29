@@ -1,0 +1,23 @@
+[
+  {
+    "fuv": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "expectedResult": true,
+    "errorMessage": "makeLaunchDecision fails positive test "
+  }
+]
