@@ -22,7 +22,8 @@ public class LicJudge {
         lic[11] = judgeLic11(coordinates, parameters.getgPoints());
         lic[12] = judgeLic12(coordinates, parameters.getLength1(), parameters.getLength2(), parameters.getkPoints());
         lic[13] = judgeLic13();
-        lic[14] = judgeLic14();
+        lic[14] = judgeLic14(coordinates, parameters.getePoints(), parameters.getfPoints(), parameters.getArea1(),
+                parameters.getArea2());
 
         return lic;
     }
@@ -538,8 +539,70 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic14() {
-        // todo: implement LIC 14 judgement
+    /**
+     * Evaluates a condition based on the areas of triangles formed by three points
+     * in a coordinate array.
+     * <p>
+     * The function checks if there exists at least one triangle, formed by points
+     * separated by exactly {@code ePoints}
+     * and {@code fPoints} consecutive points, that has an area greater than
+     * {@code area1}. Additionally, it checks if
+     * there exists at least one triangle with an area less than {@code area2}. Both
+     * conditions must be satisfied for the
+     * function to return {@code true}.
+     * </p>
+     *
+     * @param coordinates An array of {@link Coordinate} objects representing the
+     *                    points in the 2D space.
+     * @param ePoints     The number of points separating the first and second
+     *                    vertex of the triangle.
+     * @param fPoints     The number of points separating the second and third
+     *                    vertex of the triangle.
+     * @param area1       The minimum area for the first triangle condition (greater
+     *                    than area1).
+     * @param area2       The maximum area for the second triangle condition (less
+     *                    than area2).
+     * @return {@code true} if both conditions are satisfied (a triangle with area >
+     *         {@code area1} and a triangle with
+     *         area < {@code area2}); {@code false} otherwise.
+     */
+    public boolean judgeLic14(Coordinate[] coordinates, int ePoints, int fPoints, double area1, double area2) {
+
+        if (coordinates == null || coordinates.length < 5 || ePoints < 1 || fPoints < 1
+                || ePoints + fPoints > coordinates.length - 3 || area2 < 0) {
+            return false;
+        }
+
+        boolean condition1 = false;
+
+        for (int i = 0; i < (coordinates.length - ePoints - fPoints - 2) && !condition1; i++) {
+
+            Coordinate vertexA = coordinates[i];
+            Coordinate vertexB = coordinates[i + ePoints + 1];
+            Coordinate vertexC = coordinates[i + ePoints + fPoints + 2];
+
+            double triangleArea = Coordinate.areaOfTriangle(vertexA, vertexB, vertexC);
+            if (triangleArea > area1) {
+                condition1 = true;
+            }
+        }
+
+        if (!condition1) {
+            return false;
+        }
+
+        for (int i = 0; i < (coordinates.length - ePoints - fPoints - 2); i++) {
+
+            Coordinate vertexA = coordinates[i];
+            Coordinate vertexB = coordinates[i + ePoints + 1];
+            Coordinate vertexC = coordinates[i + ePoints + fPoints + 2];
+
+            double triangleArea = Coordinate.areaOfTriangle(vertexA, vertexB, vertexC);
+            if (triangleArea < area2) {
+                return true;
+            }
+        }
+
         return false;
     }
 }
