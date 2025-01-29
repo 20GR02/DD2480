@@ -1,0 +1,19 @@
+[
+  {
+    "coordinates": [],
+    "area1": 10.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic3 fails validation test 0: empty coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "area1": 10.0,
+    "expectedResult": false,
+    "errorMessage": "judgeLic3 fails validation test 1: single coordinate"
+  }
+]

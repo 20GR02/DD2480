@@ -123,7 +123,7 @@ public class LicJudge {
      *         points that form a triangle with an area greater than AREA1,
      *         {@code false} otherwise
      */
-    private boolean judgeLic3(Coordinate[] points, double thresholdArea) {
+    public boolean judgeLic3(Coordinate[] points, double thresholdArea) {
 
         if (points == null || points.length < 3) {
             return false;
