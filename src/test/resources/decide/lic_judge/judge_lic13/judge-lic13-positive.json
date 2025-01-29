@@ -1,0 +1,40 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 10,
+        "y": 13
+      },
+      {
+        "x": 0,
+        "y": 7
+      },
+      {
+        "x": -1,
+        "y": 1
+      },
+      {
+        "x": -20,
+        "y": 3
+      }
+    ],
+    "aPoints": 1,
+    "bPoints": 2,
+    "radius1": 10,
+    "radius2": 2,
+    "expectedResult": true,
+    "errorMessage": "judgeLic13 fails positive test"
+  }
+]

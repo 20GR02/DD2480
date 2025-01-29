@@ -1,0 +1,45 @@
+[
+  {
+    "coordinates": [{}],
+    "aPoints": 1,
+    "bPoints": 2,
+    "radius1": 1,
+    "radius2": 4,
+    "expectedResult": false,
+    "errorMessage": "judgeLic13 fails validation test: empty coordinate"
+  },
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 1.5,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 7
+      },
+      {
+        "x": 4,
+        "y": 5
+      }
+    ],
+    "aPoints": 1,
+    "bPoints": 2,
+    "radius1": 1,
+    "radius2": -2,
+    "expectedResult": false,
+    "errorMessage": "judgeLic13 fails validation test: radius2 lower than 0"
+  }
+]
