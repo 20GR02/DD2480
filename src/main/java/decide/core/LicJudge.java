@@ -21,7 +21,8 @@ public class LicJudge {
         lic[10] = judgeLic10();
         lic[11] = judgeLic11(coordinates, parameters.getgPoints());
         lic[12] = judgeLic12(coordinates, parameters.getLength1(), parameters.getLength2(), parameters.getkPoints());
-        lic[13] = judgeLic13();
+        lic[13] = judgeLic13(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1(),
+                parameters.getRadius2());
         lic[14] = judgeLic14();
 
         return lic;
@@ -496,8 +497,59 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic13() {
-        // todo: implement LIC 13 judgement
+    /**
+     * Checks whether there exist at least one set of three data points in the given
+     * array,
+     * separated by exactly {@code aPoints} and {@code bPoints} consecutive
+     * intervening points,
+     * that satisfy both of the following conditions:
+     * <ul>
+     * <li>At least one such set of three points cannot be contained within or on a
+     * circle of radius {@code radius1}.</li>
+     * <li>At least one such set of three points (which can be the same or different
+     * from the previous set) can be contained within or on a circle of radius
+     * {@code radius2}.</li>
+     * </ul>
+     * Both conditions must be met for the function to return {@code true}.
+     * The condition is not met when {@code coordinates.length < 5}.
+     *
+     * @param coordinates An array of {@link Coordinate} objects representing the
+     *                    data points.
+     * @param aPoints     The number of consecutive intervening points between the
+     *                    first and second points.
+     * @param bPoints     The number of consecutive intervening points between the
+     *                    second and third points.
+     * @param radius1     The radius threshold for the first condition (points must
+     *                    not fit in or on this circle).
+     * @param radius2     The radius threshold for the second condition (points must
+     *                    fit in or on this circle).
+     * @return {@code true} if both conditions are satisfied, otherwise
+     *         {@code false}.
+     */
+    public boolean judgeLic13(Coordinate[] coordinates, int aPoints, int bPoints, double radius1, double radius2) {
+
+        if (coordinates == null || coordinates.length < 5 || radius2 < 0) {
+            return false;
+        }
+
+        boolean cond1 = false;
+        boolean cond2 = false;
+
+        for (int i = 0; i < coordinates.length - aPoints - bPoints - 2; i++) {
+            double circumradius = Coordinate.circumcircleRadius(coordinates[i], coordinates[i + aPoints + 1],
+                    coordinates[i + aPoints + 1 + bPoints + 1]);
+            if (circumradius > radius1) {
+                cond1 = true;
+            }
+            if (circumradius <= radius2) {
+                cond2 = true;
+            }
+
+            if (cond1 && cond2) {
+                return true;
+            }
+        }
+
         return false;
     }
 
