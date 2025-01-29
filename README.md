@@ -90,7 +90,7 @@ Everyone has been active in this group project, and the collaboration has been e
 - Kohei Kuramoto
 - Max Linghag Ahlgren
 - Simon Li
-- Yahang Lin
+- Yuhang Lin
 
 ### Specific contributions to the project:
 
