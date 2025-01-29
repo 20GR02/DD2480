@@ -1,0 +1,35 @@
+[
+  {
+    "coordinates": [
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 32,
+        "y": -3
+      },
+      {
+        "x": 3,
+        "y": 0
+      }
+    ],
+    "cPoints": 2,
+    "dPoints": 1,
+    "epsilon": 1.57079633,
+    "expectedResult": false,
+    "errorMessage": "judgeLic9 fails negative test"
+  }
+]
