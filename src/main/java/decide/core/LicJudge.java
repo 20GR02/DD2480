@@ -18,12 +18,13 @@ public class LicJudge {
         lic[7] = judgeLic7(coordinates, parameters.getkPoints(), parameters.getLength1());
         lic[8] = judgeLic8(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1());
         lic[9] = judgeLic9(coordinates, parameters.getcPoints(), parameters.getdPoints(), parameters.getEpsilon());
-        lic[10] = judgeLic10();
+        lic[10] = judgeLic10(coordinates, parameters.getePoints(), parameters.getfPoints(), parameters.getArea1());
         lic[11] = judgeLic11(coordinates, parameters.getgPoints());
         lic[12] = judgeLic12(coordinates, parameters.getLength1(), parameters.getLength2(), parameters.getkPoints());
         lic[13] = judgeLic13(coordinates, parameters.getaPoints(), parameters.getbPoints(), parameters.getRadius1(),
                 parameters.getRadius2());
-        lic[14] = judgeLic14();
+        lic[14] = judgeLic14(coordinates, parameters.getePoints(), parameters.getfPoints(), parameters.getArea1(),
+                parameters.getArea2());
 
         return lic;
     }
@@ -87,7 +88,7 @@ public class LicJudge {
      * where the angle at the vertex (the second point) does not lie within the
      * range
      * {@code [π - epsilon, π + epsilon]}.
-     * 
+     *
      * @param coordinates an array representing the coordinate system, where each
      *                    element is a pair of (x, y) coordinates
      * @param epsilon     The allowable angular deviation in radians. Must be in the
@@ -123,7 +124,7 @@ public class LicJudge {
      *         points that form a triangle with an area greater than AREA1,
      *         {@code false} otherwise
      */
-    private boolean judgeLic3(Coordinate[] points, double thresholdArea) {
+    public boolean judgeLic3(Coordinate[] points, double thresholdArea) {
 
         if (points == null || points.length < 3) {
             return false;
@@ -408,8 +409,45 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic10() {
-        // todo: implement LIC 10 judgement
+    /**
+     * Evaluates whether there exists at least one set of three data points from the
+     * given coordinates that form a triangle
+     * with an area greater than the specified threshold. The three points must be
+     * separated by exactly {@code ePoints} and {@code fPoints}
+     * consecutive intervening points, respectively.
+     *
+     * @param coordinates An array of {@code Coordinate} objects representing the
+     *                    data
+     *                    points.
+     * @param ePoints     The number of consecutive points between the first and
+     *                    second vertices of the triangle.
+     * @param fPoints     The number of consecutive points between the second and
+     *                    third vertices of the triangle.
+     * @param area1       The threshold area value. The function will return true if
+     *                    a triangle with an area greater than this value is found.
+     * @return {@code true} if there exists a set of three points forming a triangle
+     *         with
+     *         area greater than {@code area1}; {@code false} otherwise.
+     */
+    public boolean judgeLic10(Coordinate[] coordinates, int ePoints, int fPoints, double area1) {
+
+        if (coordinates == null || coordinates.length < 5 || ePoints < 1 || fPoints < 1
+                || ePoints + fPoints > coordinates.length - 3) {
+            return false;
+        }
+
+        for (int i = 0; i < (coordinates.length - ePoints - fPoints - 2); i++) {
+
+            Coordinate vertexA = coordinates[i];
+            Coordinate vertexB = coordinates[i + ePoints + 1];
+            Coordinate vertexC = coordinates[i + ePoints + fPoints + 2];
+
+            double triangleArea = Coordinate.areaOfTriangle(vertexA, vertexB, vertexC);
+            if (triangleArea > area1) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -553,8 +591,70 @@ public class LicJudge {
         return false;
     }
 
-    private boolean judgeLic14() {
-        // todo: implement LIC 14 judgement
+    /**
+     * Evaluates a condition based on the areas of triangles formed by three points
+     * in a coordinate array.
+     * <p>
+     * The function checks if there exists at least one triangle, formed by points
+     * separated by exactly {@code ePoints}
+     * and {@code fPoints} consecutive points, that has an area greater than
+     * {@code area1}. Additionally, it checks if
+     * there exists at least one triangle with an area less than {@code area2}. Both
+     * conditions must be satisfied for the
+     * function to return {@code true}.
+     * </p>
+     *
+     * @param coordinates An array of {@link Coordinate} objects representing the
+     *                    points in the 2D space.
+     * @param ePoints     The number of points separating the first and second
+     *                    vertex of the triangle.
+     * @param fPoints     The number of points separating the second and third
+     *                    vertex of the triangle.
+     * @param area1       The minimum area for the first triangle condition (greater
+     *                    than area1).
+     * @param area2       The maximum area for the second triangle condition (less
+     *                    than area2).
+     * @return {@code true} if both conditions are satisfied (a triangle with area >
+     *         {@code area1} and a triangle with
+     *         area < {@code area2}); {@code false} otherwise.
+     */
+    public boolean judgeLic14(Coordinate[] coordinates, int ePoints, int fPoints, double area1, double area2) {
+
+        if (coordinates == null || coordinates.length < 5 || ePoints < 1 || fPoints < 1
+                || ePoints + fPoints > coordinates.length - 3 || area2 < 0) {
+            return false;
+        }
+
+        boolean condition1 = false;
+
+        for (int i = 0; i < (coordinates.length - ePoints - fPoints - 2) && !condition1; i++) {
+
+            Coordinate vertexA = coordinates[i];
+            Coordinate vertexB = coordinates[i + ePoints + 1];
+            Coordinate vertexC = coordinates[i + ePoints + fPoints + 2];
+
+            double triangleArea = Coordinate.areaOfTriangle(vertexA, vertexB, vertexC);
+            if (triangleArea > area1) {
+                condition1 = true;
+            }
+        }
+
+        if (!condition1) {
+            return false;
+        }
+
+        for (int i = 0; i < (coordinates.length - ePoints - fPoints - 2); i++) {
+
+            Coordinate vertexA = coordinates[i];
+            Coordinate vertexB = coordinates[i + ePoints + 1];
+            Coordinate vertexC = coordinates[i + ePoints + fPoints + 2];
+
+            double triangleArea = Coordinate.areaOfTriangle(vertexA, vertexB, vertexC);
+            if (triangleArea < area2) {
+                return true;
+            }
+        }
+
         return false;
     }
 }
