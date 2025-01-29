@@ -86,7 +86,7 @@ public class LicJudge {
      * where the angle at the vertex (the second point) does not lie within the
      * range
      * {@code [π - epsilon, π + epsilon]}.
-     * 
+     *
      * @param coordinates an array representing the coordinate system, where each
      *                    element is a pair of (x, y) coordinates
      * @param epsilon     The allowable angular deviation in radians. Must be in the
