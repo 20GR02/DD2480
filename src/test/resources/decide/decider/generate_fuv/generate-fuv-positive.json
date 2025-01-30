@@ -1,0 +1,24 @@
+[
+  {
+    "pum": [
+      [false, false, true, false],
+      [true, true, true, true],
+      [true, true, false, true],
+      [true, true, true, true]
+    ],
+    "puv": [false, true, true, true],
+    "expectedResult": [true, true, false, true],
+    "errorMessage": "fuv fails positive test"
+  },
+  {
+    "pum": [
+      [false, false, true, false],
+      [false, false, false, false],
+      [false, true, true, true],
+      [true, true, false, true]
+    ],
+    "puv": [true, true, true, true],
+    "expectedResult": [false, false, false, false],
+    "errorMessage": "fuv fails positive test"
+  }
+]
