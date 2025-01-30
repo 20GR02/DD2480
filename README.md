@@ -44,7 +44,12 @@ This project is an implementation of the DECIDE() function, which is part of a h
 
 ### Prerequisites
 
-Before running the project, ensure you have Maven installed. If you haven’t installed it yet, follow the instructions [here](https://maven.apache.org/install.html).
+Before running the project, ensure you have Maven and Java installed. The required versions are:
+
+- **Maven version:** apache-maven-3.9.9
+- **Java version:** 17.0.2
+
+If you haven’t installed Maven yet, follow the instructions [here](https://maven.apache.org/install.html).
 
 ### Build the Project
 

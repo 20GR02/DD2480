@@ -1,24 +1,23 @@
 package decide.core;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import decide.model.enums.CompTypeEnum;
-import decide.model.enums.ConnectorEnum;
-import decide.model.Coordinate;
-import decide.model.Parameters;
-import decide.util.JsonFileGenerator;
-import decide.util.JsonFileReader;
-import decide.util.JsonUtil;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import decide.model.Coordinate;
+import decide.model.Parameters;
+import decide.model.enums.ConnectorEnum;
+import decide.util.JsonFileGenerator;
+import decide.util.JsonUtil;
+
 public class Decider {
     /**
-     * Represents the input data structure for {@link  Decider#decide} method.
+     * Represents the input data structure for {@link Decider#decide} method.
      *
      * @param numPoints   the number of planar data points
      * @param coordinates array containing the coordinates of the points
@@ -27,7 +26,7 @@ public class Decider {
      * @param puv         preliminary unlocking vector
      */
     public record DeciderData(int numPoints, Coordinate[] coordinates,
-                              Parameters parameters, ConnectorEnum[][] lcm, boolean[] puv) {
+            Parameters parameters, ConnectorEnum[][] lcm, boolean[] puv) {
     }
 
     /**
@@ -124,13 +123,23 @@ public class Decider {
     private static final ObjectMapper OBJECT_MAPPER = JsonUtil.getObjectMapper();
 
     /**
-     * Generate PUM (Preliminary Unlocking Matrix) based on CMV (Conditions Met Vector) and LCM (Logical Connector Matrix)
+     * Generate PUM (Preliminary Unlocking Matrix) based on CMV (Conditions Met
+     * Vector) and LCM (Logical Connector Matrix)
      *
      * @param cmv Conditions Met Vector
      * @param lcm Logical Connector Matrix
      * @return generated PUM
      */
-    private static boolean[][] generatePum(boolean[] cmv, ConnectorEnum[][] lcm) {
+    public static boolean[][] generatePum(boolean[] cmv, ConnectorEnum[][] lcm) {
+
+        if (cmv.length < 1 || lcm[0].length < 1) {
+            throw new IllegalArgumentException("LCM and CMV is empty");
+        }
+
+        if (cmv.length != lcm[0].length) {
+            throw new IllegalArgumentException("LCM and CMV is not the same sizes");
+        }
+
         int length = cmv.length;
         boolean[][] pum = new boolean[length][length];
 
@@ -154,7 +163,8 @@ public class Decider {
     }
 
     /**
-     * Generate FUV (Final Unlocking Vector) based on PUM (Preliminary Unlocking Matrix) and PUV (Preliminary Unlocking Vector)
+     * Generate FUV (Final Unlocking Vector) based on PUM (Preliminary Unlocking
+     * Matrix) and PUV (Preliminary Unlocking Vector)
      *
      * @param pum Preliminary Unlocking Matrix
      * @param puv Preliminary Unlocking Vector
@@ -201,4 +211,3 @@ public class Decider {
         return launchDecision;
     }
 }
-
