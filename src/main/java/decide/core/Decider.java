@@ -40,10 +40,14 @@ public class Decider {
      * @return the launch decision
      */
     public boolean decide(int numPoints,
-            Coordinate[] coordinates,
-            Parameters parameters,
-            ConnectorEnum[][] lcm,
-            boolean[] puv) {
+                          Coordinate[] coordinates,
+                          Parameters parameters,
+                          ConnectorEnum[][] lcm,
+                          boolean[] puv) {
+        if (coordinates.length != numPoints) {
+            return false;
+        }
+
         this.coordinates = coordinates;
         this.numPoints = numPoints;
         this.lcm = lcm;
