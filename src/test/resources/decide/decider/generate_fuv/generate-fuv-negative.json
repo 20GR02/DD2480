@@ -1,0 +1,13 @@
+[
+  {
+    "pum": [
+      [true, true, true, true],
+      [true, false, false, true],
+      [true, true, false, true],
+      [true, true, true, true]
+    ],
+    "puv": [true, false, false, true],
+    "expectedResult": [false, true, true, true],
+    "errorMessage": "fuv fails negative test"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "pum": [
+      [false, false, true, false],
+      [true, true, true, true],
+      [true, true, false, true],
+      [true, true, true, true]
+    ],
+    "puv": [],
+    "expectedResult": [true, true, true, true],
+    "errorMessage": "fuv fails validation test: empty puv"
+  },
+  {
+    "pum": [[]],
+    "puv": [false, true, false, true],
+    "expectedResult": [true, true, true, true],
+    "errorMessage": "fuv fails validation test: empty pum"
+  },
+  {
+    "pum": [
+      [false, false, true, false],
+      [true, true, true, true],
+      [true, true, false, true],
+      [true, true, true, true]
+    ],
+    "puv": [false, true, false, true, false],
+    "expectedResult": [true, true, true, true],
+    "errorMessage": "fuv fails validation test: vector and matrix dimension mismatch"
+  }
+]
