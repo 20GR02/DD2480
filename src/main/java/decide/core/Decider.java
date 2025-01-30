@@ -40,10 +40,10 @@ public class Decider {
      * @return the launch decision
      */
     public boolean decide(int numPoints,
-                          Coordinate[] coordinates,
-                          Parameters parameters,
-                          ConnectorEnum[][] lcm,
-                          boolean[] puv) {
+            Coordinate[] coordinates,
+            Parameters parameters,
+            ConnectorEnum[][] lcm,
+            boolean[] puv) {
         if (coordinates.length != numPoints) {
             return false;
         }
@@ -170,7 +170,16 @@ public class Decider {
      * @param puv Preliminary Unlocking Vector
      * @return generated FUV
      */
-    private static boolean[] generateFuv(boolean[][] pum, boolean[] puv) {
+    public static boolean[] generateFuv(boolean[][] pum, boolean[] puv) {
+
+        if (pum[0].length == 0 || puv.length == 0) {
+            throw new IllegalArgumentException("PUM or PUV are empty");
+        }
+
+        if (pum[0].length != puv.length) {
+            throw new IllegalArgumentException("Mismatch between PUM and PUV dimensions");
+        }
+
         int length = puv.length;
         boolean[] fuv = new boolean[length];
 
