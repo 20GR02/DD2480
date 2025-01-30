@@ -1,0 +1,18 @@
+[
+  {
+    "cmv": [true, false, true, false],
+    "lcm": [
+      ["ORR", "ANDD", "NOTUSED", "ORR"],
+      ["ANDD", "ORR", "ANDD", "NOTUSED"],
+      ["NOTUSED", "ANDD", "ORR", "ANDD"],
+      ["ORR", "NOTUSED", "ANDD", "ORR"]
+    ],
+    "expectedResult": [
+      [true, false, true, true],
+      [false, false, false, true],
+      [true, false, true, false],
+      [true, true, false, false]
+    ],
+    "errorMessage": "pum fails positive test"
+  }
+]

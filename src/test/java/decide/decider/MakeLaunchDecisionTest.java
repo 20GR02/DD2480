@@ -1,16 +1,17 @@
 package decide.decider;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import decide.core.Decider;
-import decide.util.JsonFileReader;
-import decide.util.JsonUtil;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import decide.core.Decider;
+import decide.util.JsonFileReader;
+import decide.util.JsonUtil;
 
 public class MakeLaunchDecisionTest {
     @Test
@@ -18,7 +19,6 @@ public class MakeLaunchDecisionTest {
         String path = "decide/decider/make_launch_decision/make-launch-decision-negative.json";
         MakeLaunchDecisionData[] dataArray = getMakeLaunchDecisionData(path);
 
-        Decider decider = new Decider();
         for (MakeLaunchDecisionData data : dataArray) {
             boolean result = Decider.makeLaunchDecision(data.fuv);
             assertEquals(data.expectedResults, result, data.errorMessage);
@@ -30,7 +30,6 @@ public class MakeLaunchDecisionTest {
         String path = "decide/decider/make_launch_decision/make-launch-decision-positive.json";
         MakeLaunchDecisionData[] dataArray = getMakeLaunchDecisionData(path);
 
-        Decider decider = new Decider();
         for (MakeLaunchDecisionData data : dataArray) {
             boolean result = Decider.makeLaunchDecision(data.fuv);
             assertEquals(data.expectedResults, result, data.errorMessage);
@@ -42,7 +41,6 @@ public class MakeLaunchDecisionTest {
         String path = "decide/decider/make_launch_decision/make-launch-decision-valid.json";
         MakeLaunchDecisionData[] dataArray = getMakeLaunchDecisionData(path);
 
-        Decider decider = new Decider();
         for (MakeLaunchDecisionData data : dataArray) {
             boolean result = Decider.makeLaunchDecision(data.fuv);
             assertEquals(data.expectedResults, result, data.errorMessage);
@@ -52,7 +50,7 @@ public class MakeLaunchDecisionTest {
     private static final ObjectMapper OBJECT_MAPPER = JsonUtil.getObjectMapper();
 
     private record MakeLaunchDecisionData(boolean[] fuv,
-                                          boolean expectedResults, String errorMessage) {
+            boolean expectedResults, String errorMessage) {
     }
 
     private static MakeLaunchDecisionData[] getMakeLaunchDecisionData(String path) {
